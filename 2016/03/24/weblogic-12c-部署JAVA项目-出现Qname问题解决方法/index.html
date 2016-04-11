@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>weblogic 12c 部署JAVA项目 出现Qname问题解决方法 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="因项目部署在tomcat服务器上不稳定，偶尔出现内存溢出，或者链接池饱满提示链接数据库失败，所以计划把该项目部署到weblogic,因项目用的是JDK1.6，weblogic 10 不兼容，需重新安装。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="weblogic 12c 部署JAVA项目 出现Qname问题解决方法">
+<meta property="og:url" content="http://yoursite.com/2016/03/24/weblogic-12c-部署JAVA项目-出现Qname问题解决方法/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="因项目部署在tomcat服务器上不稳定，偶尔出现内存溢出，或者链接池饱满提示链接数据库失败，所以计划把该项目部署到weblogic,因项目用的是JDK1.6，weblogic 10 不兼容，需重新安装。">
+<meta property="og:updated_time" content="2016-03-24T05:26:50.403Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="weblogic 12c 部署JAVA项目 出现Qname问题解决方法">
+<meta name="twitter:description" content="因项目部署在tomcat服务器上不稳定，偶尔出现内存溢出，或者链接池饱满提示链接数据库失败，所以计划把该项目部署到weblogic,因项目用的是JDK1.6，weblogic 10 不兼容，需重新安装。">
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-weblogic-12c-部署JAVA项目-出现Qname问题解决方法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/03/24/weblogic-12c-部署JAVA项目-出现Qname问题解决方法/" class="article-date">
+  <time datetime="2016-03-24T04:40:23.000Z" itemprop="datePublished">2016-03-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/笔记/">笔记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      weblogic 12c 部署JAVA项目 出现Qname问题解决方法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  因项目部署在tomcat服务器上不稳定，偶尔出现内存溢出，或者链接池饱满提示链接数据库失败，所以计划把该项目部署到weblogic,因项目用的是JDK1.6，weblogic 10 不兼容，需重新安装。<a id="more"></a><br>步骤如下：  </p>
+<ol>
+<li>下载weblogic 12c，地址为：<a href="http://www.oracle.com/technetwork/middleware/weblogic/downloads/wls-for-dev-1703574.html" target="_blank" rel="external">http://www.oracle.com/technetwork/middleware/weblogic/downloads/wls-for-dev-1703574.html</a>  版本为：Oracle WebLogic Server 12.1.2 。   </li>
+<li>安装weblogic 12c,设置用户名和密码。启动weblogic 12C。  </li>
+<li>将项目打包成WAR，然后登录weblogic后台，将项目部署到weblogic服务器；  </li>
+<li>启动项目。  </li>
+<li>报错：java.lang.NoSuchMethodError: com.google.common.*。  </li>
+<li>报错原因，weblogic 12c 和之前部署的不一样，首先它是先加载自己的jar包，然后才是你部署到什么程序的war包。  </li>
+<li><p>更改加载顺序：<br>从网上找的的方法是，在你开发的Java项目下的web-inf下，先写一个weblogic.xml的配置，这里的内容是：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">&lt;?xml version = '1.0' encoding = 'UTF-8'?&gt;</span>  </span><br><span class="line"><span class="tag">&lt;<span class="title">weblogic-web-app</span> <span class="attribute">xmlns:xsi</span>=<span class="value">"http://www.w3.org/2001/XMLSchema-instance"</span>  </span><br><span class="line">    <span class="attribute">xsi:schemaLocation</span>=<span class="value">"http://www.bea.com/ns/weblogic/weblogic-web-app http://www.bea.com/ns/weblogic/weblogic-web-app/1.0/weblogic-web-app.xsd"</span>  </span><br><span class="line">    <span class="attribute">xmlns</span>=<span class="value">"http://www.bea.com/ns/weblogic/weblogic-web-app"</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="title">context-root</span>&gt;</span>sgydjy<span class="tag">&lt;/<span class="title">context-root</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="title">container-descriptor</span>&gt;</span>  </span><br><span class="line">        <span class="comment">&lt;!-- 优先加载web工程中的包 --&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="title">prefer-web-inf-classes</span>&gt;</span>true<span class="tag">&lt;/<span class="title">prefer-web-inf-classes</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;/<span class="title">container-descriptor</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="title">weblogic-web-app</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动项目，继续报错：  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Error processing remote invocation: java.lang.LinkageError: loader constraint violation: loader (instance of weblogic/utils/classloaders/Change</span><br><span class="line">AwareClassLoader) previously initiated loading <span class="keyword">for</span> a different type with name <span class="string">"javax/xml/namespace/QName"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>报错原因：这是由于调用webservice接口时，引用了QName方法引起的，而且，在weblogic下，存在许多包含QName的jar包，所以就引起了调用QName方法失败。</p>
+</li>
+<li><p>直接删除项目下jar包中包含QName的方法，方法是，用rar打开jar包，直接用rar删除jar包中包含QName的文件。这里的QName的路径是javax/xml/namespace/QName，所以，只要删除相同路径的QName就ok了，其他包含QName的jar不管。我删除的是jaxrpc.jar 里面的。</p>
+</li>
+<li>启动，正常运行。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/03/24/weblogic-12c-部署JAVA项目-出现Qname问题解决方法/" data-id="cimw4sgx9000nwohmjp8ov4bm" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/weblogic/">weblogic</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/03/30/test/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          test
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/03/14/Goole-Guvav-1-引言/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Goole Guvav 1 引言</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/笔记/">笔记</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/阅读/">阅读</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随想/">随想</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Guava/">Guava</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oracle/">oracle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weblogic/">weblogic</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/感悟/">感悟</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/摘录/">摘录</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Guava/" style="font-size: 10px;">Guava</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/oracle/" style="font-size: 10px;">oracle</a> <a href="/tags/sql/" style="font-size: 10px;">sql</a> <a href="/tags/weblogic/" style="font-size: 10px;">weblogic</a> <a href="/tags/感悟/" style="font-size: 10px;">感悟</a> <a href="/tags/摘录/" style="font-size: 10px;">摘录</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/04/11/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/30/test5/">test5</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/30/test-4/">test 4</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/30/test3/">test3</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/30/test2/">test2</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
