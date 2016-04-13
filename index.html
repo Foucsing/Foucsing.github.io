@@ -1,11 +1,16 @@
 <!doctype html>
-<html class="theme-next use-motion ">
-<head>
+
+
+
   
 
-<meta charset="UTF-8"/>
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
 
 
 <meta http-equiv="Cache-Control" content="no-transform" />
@@ -18,29 +23,61 @@
 
 
 
-  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
 
 
 
   
-    <link href='//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
-<link rel="stylesheet" type="text/css" href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" />
-
-<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.2"/>
 
 
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo,next" />
-
-
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
 
 
 <meta name="description">
@@ -54,39 +91,55 @@
 <meta name="twitter:description">
 
 
+
 <script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: '',
-    sidebar: 'post'
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
   };
 </script>
-
-
 
   <title> Jiangzp's BOLG </title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  <!--[if lte IE 8]>
-  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
-    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
-           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
-           style='margin-left:auto;margin-right:auto;display: block;'/>
-    </a>
-  </div>
-<![endif]-->
   
 
 
 
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?1933336fa3cb06dcc278ae84c4a28d9c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
 
 
 
-  <div class="container one-column 
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left 
    page-home 
-">
+ ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -115,15 +168,15 @@
   
 
   
-    <ul id="menu" class="menu ">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
             
-            首頁
+            首页
           </a>
         </li>
       
@@ -131,29 +184,9 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-th"></i> <br />
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
             
-            分類
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-archive"></i> <br />
-            
-            歸檔
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-tags"></i> <br />
-            
-            標籤
+            分类
           </a>
         </li>
       
@@ -161,14 +194,33 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
             
-            關於
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
           </a>
         </li>
       
 
-      
       
     </ul>
   
@@ -181,11 +233,17 @@
 
     <main id="main" class="main">
       <div class="main-inner">
-        <div id="content" class="content"> 
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
   <section id="posts" class="posts-expand">
     
       
 
+  
+  
+
+  
   
   
 
@@ -200,6 +258,7 @@
             
             
               
+                
                 <a class="post-title-link" href="/2016/03/29/一些在海南拍的相片/" itemprop="url">
                   一些我们在海南玩拍的相片
                 </a>
@@ -210,7 +269,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            發表於
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2016-03-29T20:50:13+08:00" content="2016-03-29">
               2016-03-29
             </time>
@@ -218,7 +280,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分類於
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/日志/" itemprop="url" rel="index">
@@ -235,8 +301,18 @@
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/29/一些在海南拍的相片/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/29/一些在海南拍的相片/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
+          
+
+          
           
 
         </div>
@@ -244,7 +320,7 @@
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
@@ -254,10 +330,18 @@
           <p>   <img src="/uploads/images/post/DSC_3541.jpg" alt="cardinal"><br>　　“业精于勤，荒于嬉”，古人说的真对，也许是不够热爱，相机买了之后就尘封在箱子里，置之不理，平时不练习，去游玩想拍时才拿出来，以致技术一直被嫌弃。以下是一个摄影渣渣选出来自以为拿得出手的作品。我觉得其实也没什么看点，就是模特长得好看。<br>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/03/29/一些在海南拍的相片/#more" rel="contents">
-              閱讀全文 &raquo;
+              阅读全文 &raquo;
             </a>
           </div>
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -280,6 +364,10 @@
   
   
 
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
@@ -291,6 +379,7 @@
             
             
               
+                
                 <a class="post-title-link" href="/2016/03/24/weblogic-12c-部署JAVA项目-出现Qname问题解决方法/" itemprop="url">
                   weblogic 12c 部署JAVA项目 出现Qname问题解决方法
                 </a>
@@ -301,7 +390,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            發表於
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2016-03-24T12:40:23+08:00" content="2016-03-24">
               2016-03-24
             </time>
@@ -309,7 +401,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分類於
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/笔记/" itemprop="url" rel="index">
@@ -326,8 +422,18 @@
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/24/weblogic-12c-部署JAVA项目-出现Qname问题解决方法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/24/weblogic-12c-部署JAVA项目-出现Qname问题解决方法/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
+          
+
+          
           
 
         </div>
@@ -335,7 +441,7 @@
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
@@ -345,10 +451,18 @@
           <p>  因项目部署在tomcat服务器上不稳定，偶尔出现内存溢出，或者链接池饱满提示链接数据库失败，所以计划把该项目部署到weblogic,因项目用的是JDK1.6，weblogic 10 不兼容，需重新安装。
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/03/24/weblogic-12c-部署JAVA项目-出现Qname问题解决方法/#more" rel="contents">
-              閱讀全文 &raquo;
+              阅读全文 &raquo;
             </a>
           </div>
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -371,6 +485,10 @@
   
   
 
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
@@ -382,6 +500,7 @@
             
             
               
+                
                 <a class="post-title-link" href="/2016/03/14/Goole-Guvav-1-引言/" itemprop="url">
                   Goole Guvav 1 引言
                 </a>
@@ -392,7 +511,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            發表於
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2016-03-14T23:55:14+08:00" content="2016-03-14">
               2016-03-14
             </time>
@@ -400,7 +522,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分類於
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/笔记/" itemprop="url" rel="index">
@@ -417,8 +543,18 @@
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/14/Goole-Guvav-1-引言/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/14/Goole-Guvav-1-引言/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
+          
+
+          
           
 
         </div>
@@ -426,24 +562,29 @@
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-            　　之前在一个新项目中用到过guava，当时是参考大牛的代码匆匆用，没有细研究，事后觉得很强大，可以把java代码写得的很简洁漂亮，因为公司旧框架还是用远古的 java 1.5，后来的开发就没有接触过。偶然发现大牛离职前留给我的资料中有份 Getting Started with Google Gu
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/14/Goole-Guvav-1-引言/#more" rel="contents">
-              閱讀全文 &raquo;
-            </a>
-          </div>
+          
+            <p>　　之前在一个新项目中用到过<em>guava</em>，当时是参考大牛的代码匆匆用，没有细研究，事后觉得很强大，可以把<em>java</em>代码写得的很简洁漂亮，因为公司旧框架还是用远古的 <em>java 1.5</em>，后来的开发就没有接触过。偶然发现大牛离职前留给我的资料中有份 <em>Getting Started with Google Guava</em> ，于是就自己硬着头皮看了英文版，发现也能看懂大概意思，开篇有句 :<em>To start working with Guava, all you need to have is Java 1.6 or a higher version<br>installed.</em> ,觉得自己专业知识真得该更新。感慨外面的技术日新月异，一日千里。不能再像青蛙那样坐进观天，最后温水煮挂。<br>　　所以打算抽些时间在这把<em>guava</em> 的学习笔记整理下,深入学习的同时以便日后有用到时可以查阅。
+　</p>
+<h3 id="u5F15_u8A00"><a href="#u5F15_u8A00" class="headerlink" title="引言"></a>引言</h3><p>　　<em>Guava</em> 工程包括了若干被<em>Google</em>的<em>java</em>项目广泛依赖的核心库，例如：集合[collections]、缓存[caching]、原生类支持[primitives support]、并发库[concurrency libraries]、通用注解[common annotations]、字符串处理[string processing]、I/O等等。所有这些工具每天都在被Google的工程师应用在产品服务中。这些很前卫技术应该引用到日常工作里，要与时俱进。  </p>
+<p>　　因为<em>Google</em>被墙掉了， 无法连接到<em>Guava</em>的API文档，有些不清晰的地方，总是很头疼。</p>
+
+          
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -466,6 +607,10 @@
   
   
 
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
@@ -477,6 +622,7 @@
             
             
               
+                
                 <a class="post-title-link" href="/2016/03/08/不同服务器的数据库相互访问 ORA-02069/" itemprop="url">
                   不同服务器的数据库相互访问 ORA-02069
                 </a>
@@ -487,7 +633,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            發表於
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2016-03-08T09:50:41+08:00" content="2016-03-08">
               2016-03-08
             </time>
@@ -495,7 +644,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分類於
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/笔记/" itemprop="url" rel="index">
@@ -512,8 +665,18 @@
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/08/不同服务器的数据库相互访问 ORA-02069/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/08/不同服务器的数据库相互访问 ORA-02069/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
+          
+
+          
           
 
         </div>
@@ -521,7 +684,7 @@
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
@@ -531,10 +694,18 @@
           <p>  实现两个不同服务器的数据库 severA,serverB。 serverA要访问serverB对象 ,serverB把数据写入serverA的对象,以及要注意的事项;
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/03/08/不同服务器的数据库相互访问 ORA-02069/#more" rel="contents">
-              閱讀全文 &raquo;
+              阅读全文 &raquo;
             </a>
           </div>
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -557,6 +728,10 @@
   
   
 
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
@@ -568,6 +743,7 @@
             
             
               
+                
                 <a class="post-title-link" href="/2016/02/28/牧羊人奇幻之旅/" itemprop="url">
                   牧羊少年奇幻之旅
                 </a>
@@ -578,7 +754,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            發表於
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2016-02-28T22:42:54+08:00" content="2016-02-28">
               2016-02-28
             </time>
@@ -586,7 +765,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分類於
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/阅读/" itemprop="url" rel="index">
@@ -603,8 +786,18 @@
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/02/28/牧羊人奇幻之旅/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/28/牧羊人奇幻之旅/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
+          
+
+          
           
 
         </div>
@@ -612,7 +805,7 @@
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
@@ -622,10 +815,18 @@
           <p> <img src="/uploads/images/post/myr.jpg" alt="cardinal"><br>这是本很好读的书，能一口气看完，有趣，不会很乏味，隐藏着许多哲理在里面。受益匪浅。让我想起一句话，为不为者，人也。遇不遇者，时也。<br>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/02/28/牧羊人奇幻之旅/#more" rel="contents">
-              閱讀全文 &raquo;
+              阅读全文 &raquo;
             </a>
           </div>
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -648,6 +849,10 @@
   
   
 
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
@@ -659,6 +864,7 @@
             
             
               
+                
                 <a class="post-title-link" href="/2016/02/17/SQL语句的MINUS-INTERSECT和UNION-ALL/" itemprop="url">
                   SQL语句的MINUS,INTERSECT和UNION ALL 
                 </a>
@@ -669,7 +875,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            發表於
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2016-02-17T15:33:25+08:00" content="2016-02-17">
               2016-02-17
             </time>
@@ -677,7 +886,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分類於
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/笔记/" itemprop="url" rel="index">
@@ -694,8 +907,18 @@
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/02/17/SQL语句的MINUS-INTERSECT和UNION-ALL/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/17/SQL语句的MINUS-INTERSECT和UNION-ALL/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
+          
+
+          
           
 
         </div>
@@ -703,24 +926,41 @@
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-            SQL语句中的三个关键字:MINUS(减去),INTERSECT(交集)和UNION ALL(并集); 起因： 前段用MINUS 创建了个视图，由于字段类型不严谨，两个集合的字段名字相同，但字段类型不同，集合1的字段CHAR(19),集合2的字段VARCHAR2(18)  MINUS失效，导致产生了
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/02/17/SQL语句的MINUS-INTERSECT和UNION-ALL/#more" rel="contents">
-              閱讀全文 &raquo;
-            </a>
-          </div>
+          
+            <h3 id="SQL_u8BED_u53E5_u4E2D_u7684_u4E09_u4E2A_u5173_u952E_u5B57_3AMINUS_28_u51CF_u53BB_29_2CINTERSECT_28_u4EA4_u96C6_29_u548CUNION_ALL_28_u5E76_u96C6_29_3B"><a href="#SQL_u8BED_u53E5_u4E2D_u7684_u4E09_u4E2A_u5173_u952E_u5B57_3AMINUS_28_u51CF_u53BB_29_2CINTERSECT_28_u4EA4_u96C6_29_u548CUNION_ALL_28_u5E76_u96C6_29_3B" class="headerlink" title="SQL语句中的三个关键字:MINUS(减去),INTERSECT(交集)和UNION ALL(并集);"></a>SQL语句中的三个关键字:MINUS(减去),INTERSECT(交集)和UNION ALL(并集);</h3><p> 起因： 前段用MINUS 创建了个视图，由于字段类型不严谨，两个集合的字段名字相同，但字段类型不同，集合1的字段CHAR(19),集合2的字段VARCHAR2(18)  MINUS失效，导致产生了上万条问题数据。所以得深入学习相关的知识。</p>
+<ol>
+<li>UNION ALL  返回两个结果集的所有行，包括重复行，即并；  </li>
+<li>UNION  返回两个结果集的所有行，不包括重复行，即并；</li>
+<li>MINUS  返回第一个结果集有但在第二个结果集中没有的行，即差；</li>
+<li>INTERSECT 返回两个结果集都有的行，即交；   </li>
+</ol>
+<p><img src="/uploads/images/post/img0.jpg" alt="cardinal">  </p>
+<p>关于集合的概念,中学都应该学过,就不多说了.这三个关键字主要是对数据库的查询结果进行操作,正如其中文含义一样:两个查询,MINUS是从第一个查询结果减去第二个查询结果,如果有相交部分就减去相交部分;否则和第一个查询结果没有区别. INTERSECT是两个查询结果的交集,UNION ALL是两个查询的并集;</p>
+<p>虽然同样的功能可以用简单SQL语句来实现,但是性能差别非常大,有人做过实验:made_order共23万笔记录，charge_detail共17万笔记录:</p>
+ <figure class="highlight sql"><figcaption><span>SELECT order_id FROM made_order</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">　　MINUS</span><br><span class="line">　　<span class="operator"><span class="keyword">SELECT</span> order_id <span class="keyword">FROM</span> charge_detail</span></span><br></pre></td></tr></table></figure>
+<p>耗时:1.14 sec<br>　　<br> <figure class="highlight sql"><figcaption><span>SELECT a.order_id FROM made_order a</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">　　 WHERE a.order_id NOT exists (</span><br><span class="line">　　   <span class="operator"><span class="keyword">SELECT</span> order_id</span><br><span class="line">　　   <span class="keyword">FROM</span> charge_detail</span><br><span class="line">　　   <span class="keyword">WHERE</span> order_id = a.order_id</span><br><span class="line">　　 )</span></span><br></pre></td></tr></table></figure></p>
+<p>耗时:18.19 sec</p>
+<p>性能相差15.956倍!因此在遇到这种问题的时候,还是用MINUS,INTERSECT和UNION ALL来解决问题,否则面对业务中随处可见的上百万数据量的查询,数据库服务器还不被咱玩的死翘翘?</p>
+<p>PS:应用两个集合的相减,相交和相加时,是有严格要求的:1.两个集合的字段必须明确(用*就不行,报错);2.字段类型和顺序相同(名称可以不同),如:集合1的字段1是NUMBER,字段2是VARCHAR,那么集合2的字段1必须也是NUMBER,字段2必须是VARCHAR;3.不能排序,如果要对结果排序,可以在集合运算后,外面再套一个查询,然后排序,如前面的例子可以改成:</p>
+<figure class="highlight sql"><figcaption><span>SELECT * FROM </span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">   (<span class="operator"><span class="keyword">SELECT</span> order_id <span class="keyword">FROM</span> made_order</span><br><span class="line">　　 <span class="keyword">MINUS</span></span><br><span class="line">　　<span class="keyword">SELECT</span> order_id <span class="keyword">FROM</span> charge_detail)</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> ORDER_ID <span class="keyword">ASC</span></span></span><br></pre></td></tr></table></figure>
+
+          
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -743,6 +983,10 @@
   
   
 
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
@@ -754,6 +998,7 @@
             
             
               
+                
                 <a class="post-title-link" href="/2016/02/03/linux-挂载阵列/" itemprop="url">
                   linux 挂载阵列
                 </a>
@@ -764,7 +1009,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            發表於
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2016-02-03T15:27:59+08:00" content="2016-02-03">
               2016-02-03
             </time>
@@ -772,7 +1020,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分類於
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/笔记/" itemprop="url" rel="index">
@@ -789,8 +1041,18 @@
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/02/03/linux-挂载阵列/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/03/linux-挂载阵列/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
+          
+
+          
           
 
         </div>
@@ -798,24 +1060,64 @@
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-            　　邮箱里接收文件夹的邮件的账单内容为空了，然后检查数据库发现电子账单表的数据为空，以为被误删了，才导致这个问题。后来才发现是存放邮件和账单的服务器存储没有了，需要挂载。　　根据运维手册的命令在linux服务挂载存储失败，因为对linux系统不熟悉，不敢贸然操作，只好请求协助。　　只见请来的大牛，啪
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/02/03/linux-挂载阵列/#more" rel="contents">
-              閱讀全文 &raquo;
-            </a>
-          </div>
+          
+            <p>　　邮箱里接收文件夹的邮件的账单内容为空了，然后检查数据库发现电子账单表的数据为空，以为被误删了，才导致这个问题。后来才发现是存放邮件和账单的服务器存储没有了，需要挂载。<br>　　根据运维手册的命令在linux服务挂载存储失败，因为对linux系统不熟悉，不敢贸然操作，只好请求协助。<br>　　只见请来的大牛，啪啪啪敲几行命令就搞定了，感觉高深莫测，还好，我的电脑记录了他的一招一式，下面进行下拆解。</p>
+<p>  1.df -h  </p>
+<p>  显示文件系统的磁盘使用情况统计：</p>
+<pre><code class="bash">\<span class="comment"># df </span>
+Filesystem     1K-blocks    Used     Available Use% Mounted on 
+/dev/sda6       29640780 4320704     23814388  16%     / 
+udev             1536756       4     1536752    1%     /dev 
+tmpfs             617620     888     616732     1%     /run 
+none                5120       0     5120       0%     /run/lock 
+none             1544044     156     1543888    1%     /run/shm
+</code></pre>
+<p>第一列指定文件系统的名称，第二列指定一个特定的文件系统1K-块1K是<br>1024字节为单位的总内存。用和可用列正在使用中，分别指定的内存量。</p>
+<p>使用列指定使用的内存的百分比，而最后一栏”安装在”指定的文件系统的挂载点。 </p>
+<p>2.pdw  </p>
+<p>  Linux pwd命令用于显示工作目录。<br>  执行pwd指令可立刻得知您目前所在的工作目录的绝对路径名称.  </p>
+<pre><code class="bash"><span class="comment"># pwd</span>
+/root/<span class="built_in">test</span>           <span class="comment">#输出结果</span>
+</code></pre>
+<p>3.cd /etc</p>
+<p> 用于切换当前工作目录至 etc(目录参数).</p>
+<p>4.more fstab  </p>
+<p>显示 fstab 文档内容 </p>
+<pre><code class="bash">[root@server ~]<span class="comment"># cd /etc</span>
+[root@server etc]<span class="comment"># more fstab</span>
+LABEL=/                 /                       ext3    defaults        1 1
+LABEL=/var              /var                    ext3    defaults        1 2
+LABEL=/boot             /boot                   ext3    defaults        1 2
+tmpfs                   /dev/shm                tmpfs   defaults        0 0
+devpts                  /dev/pts                devpts  gid=5,mode=620  0 0
+sysfs                   /sys                    sysfs   defaults        0 0
+proc                    /proc                   proc    defaults        0 0
+LABEL=SW-cciss/c0d0p3   swap                    swap    defaults        0 0
+\<span class="comment">#/dev/vg01           /mail                   gfs2    defaults        0 0</span>
+</code></pre>
+<p>5.mount /dev/vg01 /mail  </p>
+<p>将 /dev/vg01 /mail 之下</p>
+<p>6.df -h  </p>
+<p> -h选项，通过它可以产生可读的格式df命令的输出,检查挂载是否成功；  </p>
+<p><a href="http://www.runoob.com/linux/linux-command-manual.html" target="_blank" rel="external">1.命令大全</a><br><a href="https://linux.cn/" target="_blank" rel="external">2.开源中文社区</a><br><a href="http://linux.vbird.org/" target="_blank" rel="external">3.鸟哥的linux私房菜</a>  </p>
+
+          
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -838,6 +1140,10 @@
   
   
 
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
@@ -849,6 +1155,7 @@
             
             
               
+                
                 <a class="post-title-link" href="/2016/02/02/Java中OutOfMemoryError-内存溢出/" itemprop="url">
                   Java中OutOfMemoryError(内存溢出)
                 </a>
@@ -859,7 +1166,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            發表於
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2016-02-02T15:21:04+08:00" content="2016-02-02">
               2016-02-02
             </time>
@@ -867,7 +1177,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分類於
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/笔记/" itemprop="url" rel="index">
@@ -884,8 +1198,18 @@
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/02/02/Java中OutOfMemoryError-内存溢出/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/02/Java中OutOfMemoryError-内存溢出/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
+          
+
+          
           
 
         </div>
@@ -893,33 +1217,65 @@
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-            　　java.lang.OutOfMemoryError这个错误我相信大部分开发人员都有遇到过，产生该错误的原因大都出于以下原因：  
+          
+            <p>　　<em>java.lang.OutOfMemoryError</em>这个错误我相信大部分开发人员都有遇到过，产生该错误的原因大都出于以下原因：  </p>
+<ol>
+<li>JVM内存过小；</li>
+<li>程序不严密；</li>
+<li>产生了过多的垃圾；  </li>
+</ol>
+<hr>
+<p>  <strong>导致OutOfMemoryError异常的常见原因有一下几种：</strong>  </p>
+<ol>
+<li>内存中加载的数量过于庞大如一次从数据库取出过多数据；  </li>
+<li>集合类中有对对象的引用，使用完后未清空，使得JVM不能回收；  </li>
+<li>代码中存在死循环或循环产生过多重复的对象实体；  </li>
+<li>使用的第三方软件中的BGU;  </li>
+<li>启动参数内存值设定的过小；</li>
+</ol>
+<hr>
+<p>最近又遇到接口服务器内存溢出问题，起初是 <strong>OutOfMemoryError： PermGen space</strong> 修改默认内存后好了一段时间，但是治标不治本，比如一个<em>list</em>里面放了10W条记录，溢出了，把内存调高点，到了15W,还是得溢出，学习了想相关的只是得出，要发防止堆溢出得注意一下几点：</p>
+<hr>
+<ol>
+<li>代码尽量少<em>new</em>对象；  </li>
+<li>尽可能在循环外面创建对象；</li>
+<li>存数据的容器，比如<em>array</em> 很省空间；</li>
+<li>少用一些重量级的组件，比如那个<em>calendar</em>很占空间；</li>
+</ol>
+<hr>
+<p>　　在解决 <em>java</em> 内存溢出问题之前，需要对 <em>jvm</em> （<em>java</em>虚拟机），的内存管理有一定的认识， <em>jvm</em>管理的内存大致包括三种不同类型的内存区域： <em>Permanent Generation space</em>(永久保存区域)、<em>Heap space</em> (堆区域)、<em>Java Stacks</em> (JAVA栈) <em>Class</em> 需要内存的内容主要包括次用new创建一个对象实例后，对象实例存储在堆区域中，这部分空间也被jvm的垃圾回收机制管理。而Java栈跟大多数编程语言包括汇编语言的栈功能相似，主要基本类型变量以及方法的输入输出参数。Java程序的每个线程中都有一个独立的堆栈。容易发生内存溢出问题的内存空间包括：<em>Permanent Generation space</em>和<em>Heap space</em>。</p>
+<h3 id="u7B2C_u4E00_u79CDOutOfMemoryError_uFF1A_PermGen_space"><a href="#u7B2C_u4E00_u79CDOutOfMemoryError_uFF1A_PermGen_space" class="headerlink" title="第一种OutOfMemoryError： PermGen space"></a>第一种OutOfMemoryError： PermGen space</h3><p>　发生这种问题的原意是程序中使用了大量的jar或class，使java虚拟机装载类的空间不够，与Permanent Generation space有关。解决这类问题有以下两种办法：</p>
+<ol>
+<li>增加java虚拟机中的XX:PermSize和XX:MaxPermSize参数的大小，其中XX:PermSize是初始永久保存区域大小，XX:MaxPermSize是最大永久保存区域大小。如针对tomcat6.0，在catalina.sh 或catalina.bat文件中一系列环境变量名说明结束处（大约在70行左右） 增加一行：</li>
+</ol>
+<pre><code>JAVA_OPTS=&quot; -XX:PermSize=64M -XX:MaxPermSize=128m&quot; 
+</code></pre><p>  　　如果是windows服务器还可以在系统环境变量中设置。感觉用tomcat发布<em>sprint+struts+hibernate</em>架构的程序时很容易发生这种内存溢出错误。使用上述方法，我成功解决了部署ssh项目的tomcat服务器经常宕机的问题。  </p>
+<ol>
+<li>清理应用程序中web-inf/lib下的jar，如果tomcat部署了多个应用，很多应用都使用了相同的jar，可以将共同的jar移到tomcat共同的lib下，减少类的重复加载。这种方法是网上部分人推荐的，我没试过，但感觉减少不了太大的空间，最靠谱的还是第一种方法。<h3 id="u7B2C_u4E8C_u79CDOutOfMemoryError_uFF1A_Java_heap_space"><a href="#u7B2C_u4E8C_u79CDOutOfMemoryError_uFF1A_Java_heap_space" class="headerlink" title="第二种OutOfMemoryError：  Java heap space"></a>第二种OutOfMemoryError：  Java heap space</h3>　　发生这种问题的原因是java虚拟机创建的对象太多，在进行垃圾回收之间，虚拟机分配的到堆内存空间已经用满了，与Heap space有关。解决这类问题有两种思路：</li>
+<li>检查程序，看是否有死循环或不必要地重复创建大量对象。找到原因后，修改程序和算法。<br>昨天检查上传费用明细接口程序时发现把<em>new</em>写进了循环体里面，导致不断重复创建对象，然后就产生了Java heap space的内存溢出问题，后来通过修改程序得到了解决。目前没有发现再报这个错误。</li>
+<li><p>增加Java虚拟机中Xms（初始堆大小）和Xmx（最大堆大小）参数的大小。如：  </p>
+<p> set JAVA_OPTS= -Xms256m -Xmx1024m  </p>
+<p><a href="http://outofmemory.cn/c/java-outOfMemoryError" target="_blank" rel="external">详细资料参考</a></p>
+</li>
+</ol>
 
-JVM内存过小；
-程序不严密；
-产生了过多的垃圾；  
-
-
-  导致OutOfMemoryError异常的常见原因有一下几种：  
-
-内存中加载的数量过于庞大如一
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/02/02/Java中OutOfMemoryError-内存溢出/#more" rel="contents">
-              閱讀全文 &raquo;
-            </a>
-          </div>
+          
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -942,6 +1298,10 @@ JVM内存过小；
   
   
 
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
@@ -953,6 +1313,7 @@ JVM内存过小；
             
             
               
+                
                 <a class="post-title-link" href="/2016/01/28/sql-group-by-结果集横向显示/" itemprop="url">
                    sql group by 结果集横向显示 便于建视图
                 </a>
@@ -963,7 +1324,10 @@ JVM内存过小；
 
         <div class="post-meta">
           <span class="post-time">
-            發表於
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2016-01-28T19:05:17+08:00" content="2016-01-28">
               2016-01-28
             </time>
@@ -973,8 +1337,18 @@ JVM内存过小；
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/01/28/sql-group-by-结果集横向显示/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/28/sql-group-by-结果集横向显示/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
+          
+
+          
           
 
         </div>
@@ -982,30 +1356,47 @@ JVM内存过小；
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-             1.sql 查询 group by 结果集横向显示，方便建视图，如表数据为：
-- name         qulify
+          
+            <p> 1.sql 查询 group by 结果集横向显示，方便建视图，如表数据为：</p>
+<pre><code>- name         qulify
 - apple         A
 - banana         B
 - orange        A
 - pear            B   
-- strawber
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/28/sql-group-by-结果集横向显示/#more" rel="contents">
-              閱讀全文 &raquo;
-            </a>
-          </div>
+- strawberry    C
+</code></pre><p>group by qulify ,结果集为：</p>
+<ul>
+<li>A    B   C   </li>
+<li>2    2   1    </li>
+</ul>
+<p>实现方法如下： </p>
+<pre><code class="sql"><span class="keyword">SELECT</span>  
+   <span class="keyword">sum</span>(<span class="keyword">case</span> <span class="keyword">when</span> qulify=<span class="string">'A'</span> <span class="keyword">then</span> cc <span class="keyword">else</span> <span class="number">0</span> <span class="keyword">END</span>) A,
+   <span class="keyword">sum</span>(<span class="keyword">case</span> <span class="keyword">when</span> qulify=<span class="string">'B'</span> <span class="keyword">then</span> cc <span class="keyword">else</span> <span class="number">0</span> <span class="keyword">END</span>) B,     
+   <span class="keyword">sum</span>(<span class="keyword">case</span> <span class="keyword">when</span> qulify=<span class="string">'C'</span> <span class="keyword">then</span> cc <span class="keyword">else</span> <span class="number">0</span> <span class="keyword">END</span>) <span class="keyword">C</span> 
+  <span class="keyword">FROM</span> (<span class="keyword">select</span> qulify,<span class="keyword">count</span>(*) cc  <span class="keyword">from</span> <span class="keyword">table</span>  <span class="keyword">group</span> <span class="keyword">by</span> qulify)
+</code></pre>
+<p>得到结果如下：</p>
+<pre><code>- A      B      C
+- 2      2      1
+</code></pre>
+          
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -1028,6 +1419,10 @@ JVM内存过小；
   
   
 
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
@@ -1039,6 +1434,7 @@ JVM内存过小；
             
             
               
+                
                 <a class="post-title-link" href="/2016/01/27/坚持是一种美德/" itemprop="url">
                   坚持是一种美德
                 </a>
@@ -1049,7 +1445,10 @@ JVM内存过小；
 
         <div class="post-meta">
           <span class="post-time">
-            發表於
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2016-01-27T12:23:20+08:00" content="2016-01-27">
               2016-01-27
             </time>
@@ -1057,7 +1456,11 @@ JVM内存过小；
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分類於
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/随想/" itemprop="url" rel="index">
@@ -1074,8 +1477,18 @@ JVM内存过小；
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/01/27/坚持是一种美德/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/27/坚持是一种美德/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
+          
+
+          
           
 
         </div>
@@ -1083,7 +1496,7 @@ JVM内存过小；
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
@@ -1094,10 +1507,18 @@ JVM内存过小；
 <p>工作已经有一些年头了，学了不少东西，也丢了不少东西。学过的东西一直零零散散地记录到各个地方，比如 CSDN，新浪博客，QQ空间，换来换去，总是用不惯，在这些平台记录总觉得不适，写到一半的时候弹出广告新闻的小窗口，或者网络连接异常丢失数据，而且，内容无法处理代码高亮显示，阅读困难，慢慢地就变得懒得记录了，后来有着自己搭一个博客平台的想法。
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/01/27/坚持是一种美德/#more" rel="contents">
-              閱讀全文 &raquo;
+              阅读全文 &raquo;
             </a>
           </div>
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -1119,15 +1540,16 @@ JVM内存过小；
 
   
 
- </div>
 
-        
+          </div>
+          
 
-        
-      </div>
 
-      
+          
+
+        </div>
         
+          
   
   <div class="sidebar-toggle">
     <div class="sidebar-toggle-line-wrap">
@@ -1146,31 +1568,37 @@ JVM内存过小；
 
       <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Jiangzp" itemprop="image"/>
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Jiangzp" />
           <p class="site-author-name" itemprop="name">Jiangzp</p>
+          <p class="site-description motion-element" itemprop="description"></p>
         </div>
-        <p class="site-description motion-element" itemprop="description"></p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
               <span class="site-state-item-count">10</span>
-              <span class="site-state-item-name">文章</span>
+              <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
-          <div class="site-state-item site-state-categories">
-            <a href="/categories">
-              <span class="site-state-item-count">4</span>
-              <span class="site-state-item-name">分類</span>
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
               </a>
-          </div>
+            </div>
+          
 
-          <div class="site-state-item site-state-tags">
-            <a href="/tags">
-              <span class="site-state-item-count">9</span>
-              <span class="site-state-item-name">標籤</span>
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">标签</span>
               </a>
-          </div>
+            </div>
+          
 
         </nav>
 
@@ -1183,7 +1611,8 @@ JVM内存过小；
         
         
 
-        <div class="links-of-author motion-element">
+        
+        <div class="links-of-blogroll motion-element">
           
         </div>
 
@@ -1195,99 +1624,144 @@ JVM内存过小；
   </aside>
 
 
-      
+        
+      </div>
     </main>
 
     <footer id="footer" class="footer">
-      <div class="footer-inner"> <div class="copyright" >
+      <div class="footer-inner">
+        <div class="copyright" >
   
   &copy; 
   <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
-    <i class="icon-next-heart fa fa-heart"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Jiangzp</span>
 </div>
 
 <div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
-  主題 -
+  主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT
+    NexT.Pisces
   </a>
 </div>
 
 
- </div>
+
+      </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
   </div>
 
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
   <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
 
   
-  
-  
-    
-    
-
-  
-
-
-  
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
-
-
-  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
-  
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.2" id="motion.global"></script>
-
-
-
-
-  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.2"></script>
   <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
 
   
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
 
   <script type="text/javascript">
-    $(document).ready(function () {
-      if (CONFIG.sidebar === 'always') {
-        displaySidebar();
-      }
-      if (isMobile()) {
-        FastClick.attach(document.body);
-      }
-
-      motionIntegrator.bootstrap();
-    });
+    var duoshuoQuery = {short_name:"jiangzp"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
   </script>
 
   
+    
   
+
+
+
+
 
   
   
+  
 
   
-  <script type="text/javascript" src="/js/lazyload.js"></script>
-  <script type="text/javascript">
-    $(function () {
-      $("#posts").find('img').lazyload({
-        placeholder: "/images/loading.gif",
-        effect: "fadeIn"
-      });
-    });
-  </script>
+
+  
+
 </body>
 </html>
