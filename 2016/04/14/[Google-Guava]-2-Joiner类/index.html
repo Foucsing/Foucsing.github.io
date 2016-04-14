@@ -83,10 +83,10 @@
 <meta name="description" content="Guava 的 Joiner类也称作连接器，用分隔符把字符串序列连起来，同时能很好的处理null,提供了各种方法来处理字符串加入操作，对象等。 在字符串合并连接时能是代码更简洁优雅，以下是Joiner较常用的方法。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Google Guave] 2.Joiner类 ">
-<meta property="og:url" content="http://yoursite.com/2016/04/14/[Google-Guave]-2-Joiner类/index.html">
+<meta property="og:url" content="http://yoursite.com/2016/04/14/[Google-Guava]-2-Joiner类/index.html">
 <meta property="og:site_name" content="Jiangzp's BOLG">
 <meta property="og:description" content="Guava 的 Joiner类也称作连接器，用分隔符把字符串序列连起来，同时能很好的处理null,提供了各种方法来处理字符串加入操作，对象等。 在字符串合并连接时能是代码更简洁优雅，以下是Joiner较常用的方法。">
-<meta property="og:updated_time" content="2016-04-14T09:56:22.298Z">
+<meta property="og:updated_time" content="2016-04-14T13:34:04.569Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Google Guave] 2.Joiner类 ">
 <meta name="twitter:description" content="Guava 的 Joiner类也称作连接器，用分隔符把字符串序列连起来，同时能很好的处理null,提供了各种方法来处理字符串加入操作，对象等。 在字符串合并连接时能是代码更简洁优雅，以下是Joiner较常用的方法。">
@@ -299,8 +299,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/04/14/[Google-Guave]-2-Joiner类/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/14/[Google-Guave]-2-Joiner类/" itemprop="commentsCount"></span>
+                <a href="/2016/04/14/[Google-Guava]-2-Joiner类/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/14/[Google-Guava]-2-Joiner类/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -324,10 +324,25 @@
       
         <p> Guava 的 Joiner类也称作连接器，用分隔符把字符串序列连起来，同时能很好的处理null,提供了各种方法来处理字符串加入操作，对象等。<br> 在字符串合并连接时能是代码更简洁优雅，以下是Joiner较常用的方法。  <a id="more"></a></p>
 <ol>
-<li>skipNulls 返回一个相同的行为，以符号“#”连接，自动跳过任何提供空元素的加入者。 </li>
-</ol>
+<li><p>Joiner skipNulls() 返回一个相同的行为，以符号“#”连接，自动跳过任何提供空元素的加入者。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testJoinStringsSkipNull</span><span class="params">()</span></span>&#123;</span><br><span class="line">    String[] values = <span class="keyword">new</span> String[]&#123;<span class="string">"foo"</span>,<span class="keyword">null</span>,<span class="string">"bar"</span>&#125;;</span><br><span class="line">    String returned = Joiner.on(<span class="string">"#"</span>).skipNulls().join(values);</span><br><span class="line">    assertThat(returned,is(<span class="string">"foo#bar"</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>2.useForNull 返回一个相同的行为，以符号“#”连接，“missing”自动替换nullText任何提供null元素。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testJoinStringsUseForNull</span><span class="params">()</span></span>&#123;</span><br><span class="line">    String[] values = <span class="keyword">new</span> String[]&#123;<span class="string">"foo"</span>,<span class="keyword">null</span>,<span class="string">"bar"</span>&#125;;</span><br><span class="line">    String returned = Joiner.on(<span class="string">"#"</span>).useForNull(<span class="string">"missing"</span>).join(values);</span><br><span class="line">    assertThat(returned,is(<span class="string">"foo#missing#bar"</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li><p>Joiner useForNull(String nullText) 返回一个相同的行为，以符号“#”连接，“missing”自动替换nullText任何提供null元素。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testJoinStringsUseForNull</span><span class="params">()</span></span>&#123;</span><br><span class="line">    String[] values = <span class="keyword">new</span> String[]&#123;<span class="string">"foo"</span>,<span class="keyword">null</span>,<span class="string">"bar"</span>&#125;;</span><br><span class="line">    String returned = Joiner.on(<span class="string">"#"</span>).useForNull(<span class="string">"missing"</span>).join(values);</span><br><span class="line">    assertThat(returned,is(<span class="string">"foo#missing#bar"</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>String join(Object[] parts) 返回一个包含每个部分的字符串表示，使用每个之间先前配置的分隔符的字符串</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testJoinStrings</span><span class="params">()</span></span>&#123;</span><br><span class="line">    String[] values = <span class="keyword">new</span> String[]&#123;<span class="string">"foo"</span>, <span class="string">"bar"</span>,<span class="string">"baz"</span>&#125;;</span><br><span class="line">    String returned = Joiner.on(<span class="string">"|"</span>).join(values);</span><br><span class="line">    assertThat(returned,is(<span class="string">"foo|bar|baz"</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>StringBuilder appendTo(StringBuilder builder, Object[] parts) 每个追加部分的字符串表示，使用每个之间先前配置的分离器，为构建者。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testJoinStringBuilder</span><span class="params">()</span></span>&#123;</span><br><span class="line">       String[] values = <span class="keyword">new</span> String[]&#123;<span class="string">"foo"</span>, <span class="string">"bar"</span>,<span class="string">"baz"</span>&#125;;</span><br><span class="line">       StringBuilder builder = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">       StringBuilder returned = Joiner.on(<span class="string">"|"</span>).appendTo(builder,values);</span><br><span class="line">       assertThat(returned,is(builder));</span><br><span class="line">       assertThat(returned.toString(),is(<span class="string">"foo|bar|baz"</span>));</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>StringBuilder appendTo(Writer writer, Object[] parts) 每个追加部分的字符串表示，使用每个之间先前配置的分离器，为构建者,处理读取文件.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testJoinFileWriter</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        File tempFile = <span class="keyword">new</span> File(<span class="string">"testTempFile.txt"</span>);</span><br><span class="line">        tempFile.deleteOnExit();</span><br><span class="line">        CharSink charSink = Files.asCharSink(tempFile, Charsets.UTF_8);</span><br><span class="line">        Writer writer = charSink.openStream();</span><br><span class="line">        String[] values = <span class="keyword">new</span> String[]&#123;<span class="string">"foo"</span>, <span class="string">"bar"</span>,<span class="string">"baz"</span>&#125;;</span><br><span class="line">        Joiner.on(<span class="string">"|"</span>).appendTo(writer,values);</span><br><span class="line">        writer.flush();</span><br><span class="line">        writer.close();</span><br><span class="line">        String fromFileString = Files.toString(tempFile,Charsets.UTF_8);</span><br><span class="line">        assertThat(fromFileString,is(<span class="string">"foo|bar|baz"</span>));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Joiner.MapJoiner withKeyValueSeparator(String keyValueSeparator) 返回使用给定键值分离器MapJoiner，和相同的结构，否则为Joiner连接符 .</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testMapJoiner</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//Using LinkedHashMap so that the original order is preserved</span></span><br><span class="line">    String expectedString = <span class="string">"Washington D.C=Redskins#New York City=Giants#Philadelphia=Eagles#Dallas=Cowboys"</span>;</span><br><span class="line">    Map&lt;String,String&gt; testMap = Maps.newLinkedHashMap();</span><br><span class="line">    testMap.put(<span class="string">"Washington D.C"</span>,<span class="string">"Redskins"</span>);</span><br><span class="line">    testMap.put(<span class="string">"New York City"</span>,<span class="string">"Giants"</span>);</span><br><span class="line">    testMap.put(<span class="string">"Philadelphia"</span>,<span class="string">"Eagles"</span>);</span><br><span class="line">    testMap.put(<span class="string">"Dallas"</span>,<span class="string">"Cowboys"</span>);</span><br><span class="line">    String returnedString = Joiner.on(<span class="string">"#"</span>).withKeyValueSeparator(<span class="string">"="</span>).join(testMap);</span><br><span class="line">    assertThat(returnedString,is(expectedString));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 
       
     </div>
@@ -412,8 +427,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/04/14/[Google-Guave]-2-Joiner类/"
-           data-title="[Google Guave] 2.Joiner类 " data-url="http://yoursite.com/2016/04/14/[Google-Guave]-2-Joiner类/">
+      <div class="ds-thread" data-thread-key="2016/04/14/[Google-Guava]-2-Joiner类/"
+           data-title="[Google Guave] 2.Joiner类 " data-url="http://yoursite.com/2016/04/14/[Google-Guava]-2-Joiner类/">
       </div>
     
   </div>
