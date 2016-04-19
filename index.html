@@ -259,6 +259,127 @@
             
               
                 
+                <a class="post-title-link" href="/2016/04/19/Google-Guava-3-Splitter类/" itemprop="url">
+                  [Google Guava]3.Splitter类
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-19T17:31:40+08:00" content="2016-04-19">
+              2016-04-19
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/19/Google-Guava-3-Splitter类/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/19/Google-Guava-3-Splitter类/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p> 天下大势合久必分，Guava的Joiner类提供了各种合并连接字符串的各种方法。那么相对的，Splitter（分离器） 提供了各种方法来处理分割操作字符串，对象等,以下是方法说明；<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/19/Google-Guava-3-Splitter类/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/04/14/[Google-Guava]-2-Joiner类/" itemprop="url">
                   [Google Guave] 2.Joiner类 
                 </a>
@@ -1414,127 +1535,6 @@ LABEL=SW-cciss/c0d0p3   swap                    swap    defaults        0 0
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/01/28/sql-group-by-结果集横向显示/" itemprop="url">
-                   sql group by 结果集横向显示 便于建视图
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-01-28T19:05:17+08:00" content="2016-01-28">
-              2016-01-28
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/01/28/sql-group-by-结果集横向显示/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/28/sql-group-by-结果集横向显示/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p> 1.sql 查询 group by 结果集横向显示，方便建视图，如表数据为：</p>
-<pre><code>- name         qulify
-- apple         A
-- banana         B
-- orange        A
-- pear            B   
-- strawberry    C
-</code></pre><p>group by qulify ,结果集为：</p>
-<ul>
-<li>A    B   C   </li>
-<li>2    2   1    </li>
-</ul>
-<p>实现方法如下： </p>
-<pre><code class="sql"><span class="keyword">SELECT</span>  
-   <span class="keyword">sum</span>(<span class="keyword">case</span> <span class="keyword">when</span> qulify=<span class="string">'A'</span> <span class="keyword">then</span> cc <span class="keyword">else</span> <span class="number">0</span> <span class="keyword">END</span>) A,
-   <span class="keyword">sum</span>(<span class="keyword">case</span> <span class="keyword">when</span> qulify=<span class="string">'B'</span> <span class="keyword">then</span> cc <span class="keyword">else</span> <span class="number">0</span> <span class="keyword">END</span>) B,     
-   <span class="keyword">sum</span>(<span class="keyword">case</span> <span class="keyword">when</span> qulify=<span class="string">'C'</span> <span class="keyword">then</span> cc <span class="keyword">else</span> <span class="number">0</span> <span class="keyword">END</span>) <span class="keyword">C</span> 
-  <span class="keyword">FROM</span> (<span class="keyword">select</span> qulify,<span class="keyword">count</span>(*) cc  <span class="keyword">from</span> <span class="keyword">table</span>  <span class="keyword">group</span> <span class="keyword">by</span> qulify)
-</code></pre>
-<p>得到结果如下：</p>
-<pre><code>- A      B      C
-- 2      2      1
-</code></pre>
-          
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1580,7 +1580,7 @@ LABEL=SW-cciss/c0d0p3   swap                    swap    defaults        0 0
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
