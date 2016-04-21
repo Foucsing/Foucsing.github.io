@@ -1,0 +1,706 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Guava," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Charmatcher类，或称“字符匹配器”。直观上，你可以认为一个CharMatcher实例代表着某一类字符，如数字或空白字符。事实上来说，CharMatcher实例就是对字符的布尔判断,但类似”所有空白字符”或”所有小写字母”的需求太普遍了，Guava因此创建了这API。然而使用CharMatcher的好处更在于它提供了一系列方法，让你对字符作特定类型的操作：修剪[trim]、折叠[colla">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Google Guava]2.4 Charmatcher类">
+<meta property="og:url" content="http://yoursite.com/2016/04/21/Google-Guava-2-4-Charmatcher类/index.html">
+<meta property="og:site_name" content="Jiangzp's BOLG">
+<meta property="og:description" content="Charmatcher类，或称“字符匹配器”。直观上，你可以认为一个CharMatcher实例代表着某一类字符，如数字或空白字符。事实上来说，CharMatcher实例就是对字符的布尔判断,但类似”所有空白字符”或”所有小写字母”的需求太普遍了，Guava因此创建了这API。然而使用CharMatcher的好处更在于它提供了一系列方法，让你对字符作特定类型的操作：修剪[trim]、折叠[colla">
+<meta property="og:updated_time" content="2016-04-21T08:49:23.250Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Google Guava]2.4 Charmatcher类">
+<meta name="twitter:description" content="Charmatcher类，或称“字符匹配器”。直观上，你可以认为一个CharMatcher实例代表着某一类字符，如数字或空白字符。事实上来说，CharMatcher实例就是对字符的布尔判断,但类似”所有空白字符”或”所有小写字母”的需求太普遍了，Guava因此创建了这API。然而使用CharMatcher的好处更在于它提供了一系列方法，让你对字符作特定类型的操作：修剪[trim]、折叠[colla">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> [Google Guava]2.4 Charmatcher类 | Jiangzp's BOLG </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?1933336fa3cb06dcc278ae84c4a28d9c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Jiangzp's BOLG</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                [Google Guava]2.4 Charmatcher类
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-21T16:10:03+08:00" content="2016-04-21">
+              2016-04-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/21/Google-Guava-2-4-Charmatcher类/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/21/Google-Guava-2-4-Charmatcher类/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Charmatcher类，或称“字符匹配器”。直观上，你可以认为一个CharMatcher实例代表着某一类字符，如数字或空白字符。<br>事实上来说，CharMatcher实例就是对字符的布尔判断,但类似”所有空白字符”或”所有小写字母”的需求太普遍了，Guava因此创建了这API。<br>然而使用CharMatcher的好处更在于它提供了一系列方法，让你对字符作特定类型的操作：修剪[trim]、折叠[collapse]、移除[remove]、保留[retain]等等。<br>CharMatcher实例首先代表概念1：怎么才算匹配字符？然后它还提供了很多操作概念2：如何处理这些匹配字符？<br>这样的设计使得API复杂度的线性增加可以带来灵活性和功能两方面的增长。<br><a id="more"></a>  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">String noControl = CharMatcher.JAVA_ISO_CONTROL.removeFrom(string); </span><br><span class="line"><span class="comment">//移除control字符 </span></span><br><span class="line"></span><br><span class="line">String theDigits = CharMatcher.DIGIT.retainFrom(string); </span><br><span class="line"><span class="comment">//只保留数字字符 </span></span><br><span class="line"></span><br><span class="line">String spaced = CharMatcher.WHITESPACE.trimAndCollapseFrom(string, <span class="string">' '</span>); </span><br><span class="line"><span class="comment">//去除两端的空格，并把中间的连续空格替换成单个空格 </span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">String noDigits = CharMatcher.JAVA_DIGIT.replaceFrom(string, <span class="string">"*"</span>);</span><br><span class="line"> <span class="comment">//用*号替换所有数字 </span></span><br><span class="line"></span><br><span class="line">String lowerAndDigit = CharMatcher.JAVA_DIGIT.or(CharMatcher.JAVA_LOWER_CASE).retainFrom(string); </span><br><span class="line"><span class="comment">// 只保留数字和小写字母</span></span><br></pre></td></tr></table></figure>
+<p>注：CharMatcher只处理char类型代表的字符；它不能理解0x10000到0x10FFFF的Unicode 增补字符。这些逻辑字符以代理对[surrogate pairs]的形式编码进字符串，而CharMatcher只能将这种逻辑字符看待成两个独立的字符。</p>
+<h2 id="u5B57_u6BB5_u53CA_u5176_u8BF4_u660E"><a href="#u5B57_u6BB5_u53CA_u5176_u8BF4_u660E" class="headerlink" title="字段及其说明"></a>字段及其说明</h2><ul>
+<li>static CharMatcher ANY<br>匹配任意字符。 </li>
+<li>static CharMatcher ASCII<br>确定字符是否为ASCII码，这意味着它的代码点低于128。 </li>
+<li>static CharMatcher BREAKING_WHITESPACE<br>确定一个字符是否是一个破空白（即，一个空格可以解释为格式目的词之间休息）。 </li>
+<li>static CharMatcher DIGIT<br>确定一个字符是否是根据Unicode数字。 </li>
+<li>static CharMatcher INVISIBLE<br>确定一个字符是否是看不见的;也就是说，如果它的Unicode类是任何SPACE_SEPARATOR，LINE_SEPARATOR，PARAGRAPH_SEPARATOR，控制，FORMAT，SURROGATE和PRIVATE_USE根据ICU4J。 </li>
+<li>static CharMatcher JAVA_DIGIT<br>确定一个字符是否是按照Java的定义一个数字。 </li>
+<li>static CharMatcher JAVA_ISO_CONTROL<br>确定一个字符是否是所指定的Character.isISOControl(char)ISO控制字符。 </li>
+<li>static CharMatcher JAVA_LETTER<br>确定一个字符是否是按照Java的定义的字母。<br>9+ static CharMatcher JAVA_LETTER_OR_DIGIT<br>确定一个字符是否是按照Java的定义，一个字母或数字。 </li>
+<li>static CharMatcher JAVA_LOWER_CASE<br>确定一个字符是否是按照Java定义的小写。 </li>
+<li>static CharMatcher JAVA_UPPER_CASE<br>确定一个字符是否是按照Java定义的大写。 </li>
+<li>static CharMatcher NONE<br>匹配任何字符。 </li>
+<li>static CharMatcher SINGLE_WIDTH<br>确定一个字符是否是单宽度（不是双倍宽度）。 </li>
+<li>static CharMatcher WHITESPACE<br>决定根据最新的Unicode标准是否字符是空白，如图所示这里。 </li>
+</ul>
+<h2 id="u65B9_u6CD5_u53CA_u63CF_u8FF0"><a href="#u65B9_u6CD5_u53CA_u63CF_u8FF0" class="headerlink" title="方法及描述"></a>方法及描述</h2><ul>
+<li>CharMatcher and(CharMatcher other)<br>返回一个匹配器，匹配两种匹配器和其他任何字符。 </li>
+<li>static CharMatcher anyOf(CharSequence sequence)<br>返回一个字符匹配匹配任何字符出现在给定的字符序列。 </li>
+<li>boolean apply(Character character)<br>不推荐使用。只有提供满足谓词接口;用匹配（字符）代替。 </li>
+<li>String collapseFrom(CharSequence sequence, char replacement)<br>返回输入字符序列的字符串拷贝，每个组连续的字符匹配此匹配由单一的替换字符替换。 </li>
+<li>int countIn(CharSequence sequence)<br>返回一个字符序列中发现匹配的字符的数目。 </li>
+<li>static CharMatcher forPredicate(Predicate&lt;? super Character&gt; predicate)<br>返回与相同的行为给定的基于字符的谓词匹配，但运行在原始的字符，而不是实例。 </li>
+<li>int indexIn(CharSequence sequence)<br>返回第一个匹配字符的索引中的一个字符序列，或-1，如果没有匹配的字符存在。 </li>
+<li>int indexIn(CharSequence sequence, int start)<br>返回第一个匹配字符的索引中的一个字符序列，从给定位置开始，或-1，如果没有字符的位置之后匹配。 </li>
+<li>static CharMatcher inRange(char startInclusive, char endInclusive)<br>返回一个字符匹配匹配给定范围内的任何字符（两个端点也包括在内）。 </li>
+<li>static CharMatcher is(char match)<br>返回一个字符匹配匹配只有一个指定的字符。 </li>
+<li>static CharMatcher isNot(char match)<br>返回一个字符匹配匹配除了指定的任何字符。 </li>
+<li>int lastIndexIn(CharSequence sequence)<br>返回最后一个匹配字符的索引中的字符序列，或-1，如果没有匹配的字符存在。 </li>
+<li>abstract boolean matches(char c)<br>确定给定字符一个true或false值。 </li>
+<li>boolean matchesAllOf(CharSequence sequence)<br>确定给定字符一个true或false值。 </li>
+<li>boolean matchesAnyOf(CharSequence sequence)<br>返回true如果字符序列包含至少一个匹配的字符。 </li>
+<li>boolean matchesNoneOf(CharSequence sequence)<br>返回true，如果一个字符序列中没有匹配的字符。 </li>
+<li>CharMatcher negate()<br>返回一个匹配器，不受此匹配匹配任何字符。 </li>
+<li>static CharMatcher noneOf(CharSequence sequence)<br>返回一个字符匹配器匹配不存在于给定的字符序列的任何字符。 </li>
+<li>CharMatcher or(CharMatcher other)<br>返回一个匹配器，匹配任何匹配或其他任何字符。 </li>
+<li>CharMatcher precomputed()<br>返回一个字符匹配功能上等同于这一个，但它可能会快于原来的查询;您的里程可能会有所不同。 </li>
+<li>String removeFrom(CharSequence sequence)<br>返回包含的字符序列的所有非匹配的字符，为了一个字符串。 </li>
+<li>String replaceFrom(CharSequence sequence, char replacement)<br>返回输入字符序列的字符串副本，其中每个字符匹配该匹配器由一个给定的替换字符替换。 </li>
+<li>String replaceFrom(CharSequence sequence, CharSequence replacement)<br>返回输入字符序列的字符串副本，其中每个字符匹配该匹配器由一个给定的替换序列替换。 </li>
+<li>String retainFrom(CharSequence sequence)<br>返回包含的字符序列的所有字符匹配，为了一个字符串。 </li>
+<li>String toString()<br>返回此CharMatcher，如CharMatcher.or（WHITESPACE，JAVA_DIGIT）的字符串表示。 </li>
+<li>String trimAndCollapseFrom(CharSequence sequence, char replacement)<br>折叠匹配字符完全一样collapseFrom一组如collapseFrom(java.lang.CharSequence, char) 做的一样，不同之处在于，无需更换一组被移除的匹配字符在开始或该序列的结束。 </li>
+<li>String trimFrom(CharSequence sequence)<br>返回输入字符序列省略了所有匹配器从一开始，并从该串的末尾匹配字符的字符串。 </li>
+<li>String trimLeadingFrom(CharSequence sequence)<br>返回输入字符序列，它省略了所有这些匹配的字符串开始处匹配字符的字符串。 </li>
+<li>String trimTrailingFrom(CharSequence sequence)<br>返回输入字符序列，它省略了所有这些匹配的字符串的结尾匹配字符的字符串。 </li>
+</ul>
+<h2 id="u4EE3_u7801_u793A_u4F8B"><a href="#u4EE3_u7801_u793A_u4F8B" class="headerlink" title="代码示例"></a>代码示例</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.google.common.base.CharMatcher;</span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.junit.Assert.*;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.hamcrest.CoreMatchers.*;</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * User: Bill Bejeck</span><br><span class="line"> * Date: 3/19/13</span><br><span class="line"> * Time: 11:04 PM</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CharMatcherTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testRemoveLinebreaks</span><span class="params">()</span></span>&#123;</span><br><span class="line">        String stringWithLinebreaks = <span class="string">"This is an example\n"</span>+</span><br><span class="line">                                      <span class="string">"of a String with linebreaks\n"</span>+</span><br><span class="line">                                      <span class="string">"we want on one line"</span>;</span><br><span class="line">        String expected = <span class="string">"This is an example of a String with linebreaks we want on one line"</span>;</span><br><span class="line">        String scrubbed = CharMatcher.BREAKING_WHITESPACE.replaceFrom(stringWithLinebreaks,<span class="string">' '</span>);</span><br><span class="line">        assertThat(scrubbed,is(expected));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testRemoveWhiteSpace</span><span class="params">()</span></span>&#123;</span><br><span class="line">        String tabsAndSpaces = <span class="string">"String  with      spaces     and           tabs"</span>;</span><br><span class="line">        String expected = <span class="string">"String with spaces and tabs"</span>;</span><br><span class="line">        String scrubbed = CharMatcher.WHITESPACE.collapseFrom(tabsAndSpaces,<span class="string">' '</span>);</span><br><span class="line">        assertThat(scrubbed,is(expected));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testTrimRemoveWhiteSpace</span><span class="params">()</span></span>&#123;</span><br><span class="line">        String tabsAndSpaces = <span class="string">"    String  with      spaces     and           tabs"</span>;</span><br><span class="line">        String expected = <span class="string">"String with spaces and tabs"</span>;</span><br><span class="line">        String scrubbed = CharMatcher.WHITESPACE.trimAndCollapseFrom(tabsAndSpaces,<span class="string">' '</span>);</span><br><span class="line">        assertThat(scrubbed,is(expected));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testRetainFrom</span><span class="params">()</span></span>&#123;</span><br><span class="line">        String lettersAndNumbers = <span class="string">"foo989yxbar234"</span>;</span><br><span class="line">        String expected = <span class="string">"989234"</span>;</span><br><span class="line">        String retained = CharMatcher.JAVA_DIGIT.retainFrom(lettersAndNumbers);</span><br><span class="line">        assertThat(expected,is(retained));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testCombineMatchers</span><span class="params">()</span></span>&#123;</span><br><span class="line">        CharMatcher cm = CharMatcher.inRange(<span class="string">'A'</span>,<span class="string">'E'</span>);</span><br><span class="line">        assertThat(cm.retainFrom(<span class="string">"aaaABbbccCdddDEeee"</span>),is(<span class="string">"ABCDE"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Guava/" rel="tag">#Guava</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/21/Google-Guava-2.3-String类/" rel="next" title="[Google Guava]2.3 String类">
+                <i class="fa fa-chevron-left"></i> [Google Guava]2.3 String类
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/04/21/Google-Guava-2-4-Charmatcher类/"
+           data-title="[Google Guava]2.4 Charmatcher类" data-url="http://yoursite.com/2016/04/21/Google-Guava-2-4-Charmatcher类/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Jiangzp" />
+          <p class="site-author-name" itemprop="name">Jiangzp</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u5B57_u6BB5_u53CA_u5176_u8BF4_u660E"><span class="nav-number">1.</span> <span class="nav-text">字段及其说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u65B9_u6CD5_u53CA_u63CF_u8FF0"><span class="nav-number">2.</span> <span class="nav-text">方法及描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4EE3_u7801_u793A_u4F8B"><span class="nav-number">3.</span> <span class="nav-text">代码示例</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jiangzp</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jiangzp"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

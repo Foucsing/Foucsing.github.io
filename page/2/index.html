@@ -259,6 +259,163 @@
             
               
                 
+                <a class="post-title-link" href="/2016/02/03/linux-挂载阵列/" itemprop="url">
+                  linux 挂载阵列
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-03T15:27:59+08:00" content="2016-02-03">
+              2016-02-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/02/03/linux-挂载阵列/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/03/linux-挂载阵列/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>　　邮箱里接收文件夹的邮件的账单内容为空了，然后检查数据库发现电子账单表的数据为空，以为被误删了，才导致这个问题。后来才发现是存放邮件和账单的服务器存储没有了，需要挂载。<br>　　根据运维手册的命令在linux服务挂载存储失败，因为对linux系统不熟悉，不敢贸然操作，只好请求协助。<br>　　只见请来的大牛，啪啪啪敲几行命令就搞定了，感觉高深莫测，还好，我的电脑记录了他的一招一式，下面进行下拆解。</p>
+<p>  1.df -h  </p>
+<p>  显示文件系统的磁盘使用情况统计：</p>
+<pre><code class="bash">\<span class="comment"># df </span>
+Filesystem     1K-blocks    Used     Available Use% Mounted on 
+/dev/sda6       29640780 4320704     23814388  16%     / 
+udev             1536756       4     1536752    1%     /dev 
+tmpfs             617620     888     616732     1%     /run 
+none                5120       0     5120       0%     /run/lock 
+none             1544044     156     1543888    1%     /run/shm
+</code></pre>
+<p>第一列指定文件系统的名称，第二列指定一个特定的文件系统1K-块1K是<br>1024字节为单位的总内存。用和可用列正在使用中，分别指定的内存量。</p>
+<p>使用列指定使用的内存的百分比，而最后一栏”安装在”指定的文件系统的挂载点。 </p>
+<p>2.pdw  </p>
+<p>  Linux pwd命令用于显示工作目录。<br>  执行pwd指令可立刻得知您目前所在的工作目录的绝对路径名称.  </p>
+<pre><code class="bash"><span class="comment"># pwd</span>
+/root/<span class="built_in">test</span>           <span class="comment">#输出结果</span>
+</code></pre>
+<p>3.cd /etc</p>
+<p> 用于切换当前工作目录至 etc(目录参数).</p>
+<p>4.more fstab  </p>
+<p>显示 fstab 文档内容 </p>
+<pre><code class="bash">[root@server ~]<span class="comment"># cd /etc</span>
+[root@server etc]<span class="comment"># more fstab</span>
+LABEL=/                 /                       ext3    defaults        1 1
+LABEL=/var              /var                    ext3    defaults        1 2
+LABEL=/boot             /boot                   ext3    defaults        1 2
+tmpfs                   /dev/shm                tmpfs   defaults        0 0
+devpts                  /dev/pts                devpts  gid=5,mode=620  0 0
+sysfs                   /sys                    sysfs   defaults        0 0
+proc                    /proc                   proc    defaults        0 0
+LABEL=SW-cciss/c0d0p3   swap                    swap    defaults        0 0
+\<span class="comment">#/dev/vg01           /mail                   gfs2    defaults        0 0</span>
+</code></pre>
+<p>5.mount /dev/vg01 /mail  </p>
+<p>将 /dev/vg01 /mail 之下</p>
+<p>6.df -h  </p>
+<p> -h选项，通过它可以产生可读的格式df命令的输出,检查挂载是否成功；  </p>
+<p><a href="http://www.runoob.com/linux/linux-command-manual.html" target="_blank" rel="external">1.命令大全</a><br><a href="https://linux.cn/" target="_blank" rel="external">2.开源中文社区</a><br><a href="http://linux.vbird.org/" target="_blank" rel="external">3.鸟哥的linux私房菜</a>  </p>
+
+          
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/02/02/Java中OutOfMemoryError-内存溢出/" itemprop="url">
                   Java中OutOfMemoryError(内存溢出)
                 </a>
@@ -684,7 +841,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-count">14</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

@@ -82,13 +82,13 @@
 
 <meta name="description" content="The Strings class provides a few handy utility methods for working with strings.Have you ever had to write something like the following?">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[Google Guava]4.String类">
-<meta property="og:url" content="http://yoursite.com/2016/04/21/Google-Guava-4-String类/index.html">
+<meta property="og:title" content="[Google Guava]2.3 String类">
+<meta property="og:url" content="http://yoursite.com/2016/04/21/Google-Guava-2.3-String类/index.html">
 <meta property="og:site_name" content="Jiangzp's BOLG">
 <meta property="og:description" content="The Strings class provides a few handy utility methods for working with strings.Have you ever had to write something like the following?">
-<meta property="og:updated_time" content="2016-04-21T02:33:03.497Z">
+<meta property="og:updated_time" content="2016-04-21T08:54:05.862Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="[Google Guava]4.String类">
+<meta name="twitter:title" content="[Google Guava]2.3 String类">
 <meta name="twitter:description" content="The Strings class provides a few handy utility methods for working with strings.Have you ever had to write something like the following?">
 
 
@@ -107,7 +107,7 @@
   };
 </script>
 
-  <title> [Google Guava]4.String类 | Jiangzp's BOLG </title>
+  <title> [Google Guava]2.3 String类 | Jiangzp's BOLG </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -257,7 +257,7 @@
             
             
               
-                [Google Guava]4.String类
+                [Google Guava]2.3 String类
               
             
           </h1>
@@ -299,8 +299,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/04/21/Google-Guava-4-String类/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/21/Google-Guava-4-String类/" itemprop="commentsCount"></span>
+                <a href="/2016/04/21/Google-Guava-2.3-String类/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/21/Google-Guava-2.3-String类/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -331,6 +331,9 @@
 <li>isNullOrEmpty: This method performs a null and length check on the string<br>argument and returns true if the string is in fact null or empty (length of 0)<br>It would probably be a good idea to always use the nullToEmpty method on any<br>string objects passed as arguments.  </li>
 </ul>
 <h2 id="u4EE3_u7801_u793A_u4F8B"><a href="#u4EE3_u7801_u793A_u4F8B" class="headerlink" title="代码示例"></a>代码示例</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> com.google.common.base.Strings.*;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.junit.Assert.*;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.hamcrest.CoreMatchers.*;</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * User: Bill Bejeck</span><br><span class="line"> * Date: 3/29/13</span><br><span class="line"> * Time: 8:53 PM</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringsTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testStringPadEnd</span><span class="params">()</span></span>&#123;</span><br><span class="line">        String expected = <span class="string">"boom!!!!!!"</span>;</span><br><span class="line">        String returned = padEnd(<span class="string">"boom"</span>,<span class="number">10</span>,<span class="string">'!'</span>);</span><br><span class="line">        assertThat(returned,is(expected));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testStringPadStart</span><span class="params">()</span></span>&#123;</span><br><span class="line">        String expected = <span class="string">"000000000001"</span>;</span><br><span class="line">        String returned = padStart(<span class="string">"1"</span>,<span class="number">12</span>,<span class="string">'0'</span>);</span><br><span class="line">        assertThat(returned,is(expected));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testNullToEmpty</span><span class="params">()</span></span>&#123;</span><br><span class="line">        assertThat(nullToEmpty(<span class="string">"foo"</span>),is(<span class="string">"foo"</span>));</span><br><span class="line">        assertThat(nullToEmpty(<span class="keyword">null</span>),is(<span class="string">""</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">tesEmptyToNull</span><span class="params">()</span></span>&#123;</span><br><span class="line">        assertThat(nullToEmpty(<span class="string">"foo"</span>),is(<span class="string">"foo"</span>));</span><br><span class="line">        assertThat(emptyToNull(<span class="string">""</span>),is(nullValue()));</span><br><span class="line">        assertThat(emptyToNull(<span class="string">"  "</span>),is(<span class="string">"  "</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testIsNullOrEmpty</span><span class="params">()</span></span>&#123;</span><br><span class="line">        assertThat(isNullOrEmpty(<span class="string">""</span>),is(<span class="keyword">true</span>));</span><br><span class="line">        assertThat(isNullOrEmpty(<span class="string">"  "</span>),is(<span class="keyword">false</span>));</span><br><span class="line">        assertThat(isNullOrEmpty(<span class="keyword">null</span>),is(<span class="keyword">true</span>));</span><br><span class="line">        assertThat(isNullOrEmpty(<span class="string">"foo"</span>),is(<span class="keyword">false</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>字符集[Charsets]</p>
+<p>不要这样做字符集处理：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">bytes = <span class="string">"foobarbaz"</span>.getBytes(<span class="string">"UTF-8"</span>);</span><br><span class="line">&#125;<span class="keyword">catch</span> (UnsupportedEncodingException e)&#123;</span><br><span class="line"><span class="comment">//This really can't happen UTF-8 must be supported</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//试试这样写：</span></span><br><span class="line">bytes = string.getBytes(Charsets.UTF_8);</span><br></pre></td></tr></table></figure></p>
+<p>Charsets针对所有Java平台都要保证支持的六种字符集提供了常量引用。尝试使用这些常量，而不是通过名称获取字符集实例。</p>
 
       
     </div>
@@ -360,13 +363,17 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/04/19/Google-Guava-3-Splitter类/" rel="next" title="[Google Guava]3.Splitter类">
-                <i class="fa fa-chevron-left"></i> [Google Guava]3.Splitter类
+              <a href="/2016/04/19/Google-Guava-2.2-Splitter类/" rel="next" title="[Google Guava]2.2 Splitter类">
+                <i class="fa fa-chevron-left"></i> [Google Guava]2.2 Splitter类
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/21/Google-Guava-2-4-Charmatcher类/" rel="prev" title="[Google Guava]2.4 Charmatcher类">
+                [Google Guava]2.4 Charmatcher类 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -415,8 +422,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/04/21/Google-Guava-4-String类/"
-           data-title="[Google Guava]4.String类" data-url="http://yoursite.com/2016/04/21/Google-Guava-4-String类/">
+      <div class="ds-thread" data-thread-key="2016/04/21/Google-Guava-2.3-String类/"
+           data-title="[Google Guava]2.3 String类" data-url="http://yoursite.com/2016/04/21/Google-Guava-2.3-String类/">
       </div>
     
   </div>
@@ -461,7 +468,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-count">14</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
