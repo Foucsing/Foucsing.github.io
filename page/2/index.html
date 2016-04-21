@@ -259,6 +259,164 @@
             
               
                 
+                <a class="post-title-link" href="/2016/02/02/Java中OutOfMemoryError-内存溢出/" itemprop="url">
+                  Java中OutOfMemoryError(内存溢出)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-02T15:21:04+08:00" content="2016-02-02">
+              2016-02-02
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/02/02/Java中OutOfMemoryError-内存溢出/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/02/Java中OutOfMemoryError-内存溢出/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>　　<em>java.lang.OutOfMemoryError</em>这个错误我相信大部分开发人员都有遇到过，产生该错误的原因大都出于以下原因：  </p>
+<ol>
+<li>JVM内存过小；</li>
+<li>程序不严密；</li>
+<li>产生了过多的垃圾；  </li>
+</ol>
+<hr>
+<p>  <strong>导致OutOfMemoryError异常的常见原因有一下几种：</strong>  </p>
+<ol>
+<li>内存中加载的数量过于庞大如一次从数据库取出过多数据；  </li>
+<li>集合类中有对对象的引用，使用完后未清空，使得JVM不能回收；  </li>
+<li>代码中存在死循环或循环产生过多重复的对象实体；  </li>
+<li>使用的第三方软件中的BGU;  </li>
+<li>启动参数内存值设定的过小；</li>
+</ol>
+<hr>
+<p>最近又遇到接口服务器内存溢出问题，起初是 <strong>OutOfMemoryError： PermGen space</strong> 修改默认内存后好了一段时间，但是治标不治本，比如一个<em>list</em>里面放了10W条记录，溢出了，把内存调高点，到了15W,还是得溢出，学习了想相关的只是得出，要发防止堆溢出得注意一下几点：</p>
+<hr>
+<ol>
+<li>代码尽量少<em>new</em>对象；  </li>
+<li>尽可能在循环外面创建对象；</li>
+<li>存数据的容器，比如<em>array</em> 很省空间；</li>
+<li>少用一些重量级的组件，比如那个<em>calendar</em>很占空间；</li>
+</ol>
+<hr>
+<p>　　在解决 <em>java</em> 内存溢出问题之前，需要对 <em>jvm</em> （<em>java</em>虚拟机），的内存管理有一定的认识， <em>jvm</em>管理的内存大致包括三种不同类型的内存区域： <em>Permanent Generation space</em>(永久保存区域)、<em>Heap space</em> (堆区域)、<em>Java Stacks</em> (JAVA栈) <em>Class</em> 需要内存的内容主要包括次用new创建一个对象实例后，对象实例存储在堆区域中，这部分空间也被jvm的垃圾回收机制管理。而Java栈跟大多数编程语言包括汇编语言的栈功能相似，主要基本类型变量以及方法的输入输出参数。Java程序的每个线程中都有一个独立的堆栈。容易发生内存溢出问题的内存空间包括：<em>Permanent Generation space</em>和<em>Heap space</em>。</p>
+<h3 id="u7B2C_u4E00_u79CDOutOfMemoryError_uFF1A_PermGen_space"><a href="#u7B2C_u4E00_u79CDOutOfMemoryError_uFF1A_PermGen_space" class="headerlink" title="第一种OutOfMemoryError： PermGen space"></a>第一种OutOfMemoryError： PermGen space</h3><p>　发生这种问题的原意是程序中使用了大量的jar或class，使java虚拟机装载类的空间不够，与Permanent Generation space有关。解决这类问题有以下两种办法：</p>
+<ol>
+<li>增加java虚拟机中的XX:PermSize和XX:MaxPermSize参数的大小，其中XX:PermSize是初始永久保存区域大小，XX:MaxPermSize是最大永久保存区域大小。如针对tomcat6.0，在catalina.sh 或catalina.bat文件中一系列环境变量名说明结束处（大约在70行左右） 增加一行：</li>
+</ol>
+<pre><code>JAVA_OPTS=&quot; -XX:PermSize=64M -XX:MaxPermSize=128m&quot; 
+</code></pre><p>  　　如果是windows服务器还可以在系统环境变量中设置。感觉用tomcat发布<em>sprint+struts+hibernate</em>架构的程序时很容易发生这种内存溢出错误。使用上述方法，我成功解决了部署ssh项目的tomcat服务器经常宕机的问题。  </p>
+<ol>
+<li>清理应用程序中web-inf/lib下的jar，如果tomcat部署了多个应用，很多应用都使用了相同的jar，可以将共同的jar移到tomcat共同的lib下，减少类的重复加载。这种方法是网上部分人推荐的，我没试过，但感觉减少不了太大的空间，最靠谱的还是第一种方法。<h3 id="u7B2C_u4E8C_u79CDOutOfMemoryError_uFF1A_Java_heap_space"><a href="#u7B2C_u4E8C_u79CDOutOfMemoryError_uFF1A_Java_heap_space" class="headerlink" title="第二种OutOfMemoryError：  Java heap space"></a>第二种OutOfMemoryError：  Java heap space</h3>　　发生这种问题的原因是java虚拟机创建的对象太多，在进行垃圾回收之间，虚拟机分配的到堆内存空间已经用满了，与Heap space有关。解决这类问题有两种思路：</li>
+<li>检查程序，看是否有死循环或不必要地重复创建大量对象。找到原因后，修改程序和算法。<br>昨天检查上传费用明细接口程序时发现把<em>new</em>写进了循环体里面，导致不断重复创建对象，然后就产生了Java heap space的内存溢出问题，后来通过修改程序得到了解决。目前没有发现再报这个错误。</li>
+<li><p>增加Java虚拟机中Xms（初始堆大小）和Xmx（最大堆大小）参数的大小。如：  </p>
+<p> set JAVA_OPTS= -Xms256m -Xmx1024m  </p>
+<p><a href="http://outofmemory.cn/c/java-outOfMemoryError" target="_blank" rel="external">详细资料参考</a></p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/01/28/sql-group-by-结果集横向显示/" itemprop="url">
                    sql group by 结果集横向显示 便于建视图
                 </a>
@@ -526,7 +684,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-count">13</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

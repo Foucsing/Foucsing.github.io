@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="weblogic," />
+  <meta name="keywords" content="Guava," />
 
 
 
@@ -80,16 +80,16 @@
 
 
 
-<meta name="description" content="因项目部署在tomcat服务器上不稳定，偶尔出现内存溢出，或者链接池饱满提示链接数据库失败，所以计划把该项目部署到weblogic,因项目用的是JDK1.6，weblogic 10 不兼容，需重新安装。">
+<meta name="description" content="The Strings class provides a few handy utility methods for working with strings.Have you ever had to write something like the following?">
 <meta property="og:type" content="article">
-<meta property="og:title" content="weblogic 12c 部署JAVA项目 出现Qname问题解决方法">
-<meta property="og:url" content="http://yoursite.com/2016/03/24/weblogic-12c-部署JAVA项目-出现Qname问题解决方法/index.html">
+<meta property="og:title" content="[Google Guava]4.String类">
+<meta property="og:url" content="http://yoursite.com/2016/04/21/Google-Guava-4-String类/index.html">
 <meta property="og:site_name" content="Jiangzp's BOLG">
-<meta property="og:description" content="因项目部署在tomcat服务器上不稳定，偶尔出现内存溢出，或者链接池饱满提示链接数据库失败，所以计划把该项目部署到weblogic,因项目用的是JDK1.6，weblogic 10 不兼容，需重新安装。">
-<meta property="og:updated_time" content="2016-03-24T05:26:50.403Z">
+<meta property="og:description" content="The Strings class provides a few handy utility methods for working with strings.Have you ever had to write something like the following?">
+<meta property="og:updated_time" content="2016-04-21T02:33:03.497Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="weblogic 12c 部署JAVA项目 出现Qname问题解决方法">
-<meta name="twitter:description" content="因项目部署在tomcat服务器上不稳定，偶尔出现内存溢出，或者链接池饱满提示链接数据库失败，所以计划把该项目部署到weblogic,因项目用的是JDK1.6，weblogic 10 不兼容，需重新安装。">
+<meta name="twitter:title" content="[Google Guava]4.String类">
+<meta name="twitter:description" content="The Strings class provides a few handy utility methods for working with strings.Have you ever had to write something like the following?">
 
 
 
@@ -107,7 +107,7 @@
   };
 </script>
 
-  <title> weblogic 12c 部署JAVA项目 出现Qname问题解决方法 | Jiangzp's BOLG </title>
+  <title> [Google Guava]4.String类 | Jiangzp's BOLG </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -257,7 +257,7 @@
             
             
               
-                weblogic 12c 部署JAVA项目 出现Qname问题解决方法
+                [Google Guava]4.String类
               
             
           </h1>
@@ -269,8 +269,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-24T12:40:23+08:00" content="2016-03-24">
-              2016-03-24
+            <time itemprop="dateCreated" datetime="2016-04-21T10:22:58+08:00" content="2016-04-21">
+              2016-04-21
             </time>
           </span>
 
@@ -299,8 +299,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/24/weblogic-12c-部署JAVA项目-出现Qname问题解决方法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/24/weblogic-12c-部署JAVA项目-出现Qname问题解决方法/" itemprop="commentsCount"></span>
+                <a href="/2016/04/21/Google-Guava-4-String类/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/21/Google-Guava-4-String类/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -322,26 +322,15 @@
       
 
       
-        <p>  因项目部署在tomcat服务器上不稳定，偶尔出现内存溢出，或者链接池饱满提示链接数据库失败，所以计划把该项目部署到weblogic,因项目用的是JDK1.6，weblogic 10 不兼容，需重新安装。<a id="more"></a><br>步骤如下：  </p>
-<ol>
-<li>下载weblogic 12c，地址为：<a href="http://www.oracle.com/technetwork/middleware/weblogic/downloads/wls-for-dev-1703574.html" target="_blank" rel="external">http://www.oracle.com/technetwork/middleware/weblogic/downloads/wls-for-dev-1703574.html</a>  版本为：Oracle WebLogic Server 12.1.2 。   </li>
-<li>安装weblogic 12c,设置用户名和密码。启动weblogic 12C。  </li>
-<li>将项目打包成WAR，然后登录weblogic后台，将项目部署到weblogic服务器；  </li>
-<li>启动项目。  </li>
-<li>报错：java.lang.NoSuchMethodError: com.google.common.*。  </li>
-<li>报错原因，weblogic 12c 和之前部署的不一样，首先它是先加载自己的jar包，然后才是你部署到什么程序的war包。  </li>
-<li><p>更改加载顺序：<br>从网上找的的方法是，在你开发的Java项目下的web-inf下，先写一个weblogic.xml的配置，这里的内容是：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">&lt;?xml version = '1.0' encoding = 'UTF-8'?&gt;</span>  </span><br><span class="line"><span class="tag">&lt;<span class="title">weblogic-web-app</span> <span class="attribute">xmlns:xsi</span>=<span class="value">"http://www.w3.org/2001/XMLSchema-instance"</span>  </span><br><span class="line">    <span class="attribute">xsi:schemaLocation</span>=<span class="value">"http://www.bea.com/ns/weblogic/weblogic-web-app http://www.bea.com/ns/weblogic/weblogic-web-app/1.0/weblogic-web-app.xsd"</span>  </span><br><span class="line">    <span class="attribute">xmlns</span>=<span class="value">"http://www.bea.com/ns/weblogic/weblogic-web-app"</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="title">context-root</span>&gt;</span>sgydjy<span class="tag">&lt;/<span class="title">context-root</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="title">container-descriptor</span>&gt;</span>  </span><br><span class="line">        <span class="comment">&lt;!-- 优先加载web工程中的包 --&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="title">prefer-web-inf-classes</span>&gt;</span>true<span class="tag">&lt;/<span class="title">prefer-web-inf-classes</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;/<span class="title">container-descriptor</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="title">weblogic-web-app</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>启动项目，继续报错：  </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Error processing remote invocation: java.lang.LinkageError: loader constraint violation: loader (instance of weblogic/utils/classloaders/Change</span><br><span class="line">AwareClassLoader) previously initiated loading <span class="keyword">for</span> a different type with name <span class="string">"javax/xml/namespace/QName"</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>报错原因：这是由于调用webservice接口时，引用了QName方法引起的，而且，在weblogic下，存在许多包含QName的jar包，所以就引起了调用QName方法失败。</p>
-</li>
-<li><p>直接删除项目下jar包中包含QName的方法，方法是，用rar打开jar包，直接用rar删除jar包中包含QName的文件。这里的QName的路径是javax/xml/namespace/QName，所以，只要删除相同路径的QName就ok了，其他包含QName的jar不管。我删除的是jaxrpc.jar 里面的。</p>
-</li>
-<li>启动，正常运行。</li>
-</ol>
+        <p>The Strings class provides a few handy utility methods for working with strings.<br>Have you ever had to write something like the following?<br><a id="more"></a><br>StringBuilder builder = new StringBuilder(“foo”);<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> c = <span class="string">'x'</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">3</span>; i++)&#123;</span><br><span class="line">builder.append(c);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> builder.toString();</span><br></pre></td></tr></table></figure></p>
+<p>The previous example, which spans 6 lines of code, can now be replaced with<br>one line.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Strings.padEnd(<span class="string">"foo"</span>,<span class="number">6</span>,<span class="string">'x'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>What’s important to note here is that the second argument, 6, specifies the minimum<br>length of the returned string and not how many times to append the x character to<br>the original string. If the provided string already had a length of 6 or greater, no<br>padding would occur. There is also a corresponding padStart method with the<br>same signature and behavior with the exception that the character is inserted in<br>front of the given string until the minimum length is met.<br>There are three very useful methods in the Strings class that are meant specifically<br>for dealing with possible null values:</p>
+<ul>
+<li>nullToEmpty: This method takes a string as an argument and returns the<br>original string if the value is not null or has a length greater than 0, otherwise<br>it returns “”””</li>
+<li>emptyToNull: This method performs in a manner similar to nullToEmpty,<br>but will return a null value if the string parameter is null or is an empty<br>string</li>
+<li>isNullOrEmpty: This method performs a null and length check on the string<br>argument and returns true if the string is in fact null or empty (length of 0)<br>It would probably be a good idea to always use the nullToEmpty method on any<br>string objects passed as arguments.  </li>
+</ul>
+<h2 id="u4EE3_u7801_u793A_u4F8B"><a href="#u4EE3_u7801_u793A_u4F8B" class="headerlink" title="代码示例"></a>代码示例</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> com.google.common.base.Strings.*;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.junit.Assert.*;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.hamcrest.CoreMatchers.*;</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * User: Bill Bejeck</span><br><span class="line"> * Date: 3/29/13</span><br><span class="line"> * Time: 8:53 PM</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringsTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testStringPadEnd</span><span class="params">()</span></span>&#123;</span><br><span class="line">        String expected = <span class="string">"boom!!!!!!"</span>;</span><br><span class="line">        String returned = padEnd(<span class="string">"boom"</span>,<span class="number">10</span>,<span class="string">'!'</span>);</span><br><span class="line">        assertThat(returned,is(expected));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testStringPadStart</span><span class="params">()</span></span>&#123;</span><br><span class="line">        String expected = <span class="string">"000000000001"</span>;</span><br><span class="line">        String returned = padStart(<span class="string">"1"</span>,<span class="number">12</span>,<span class="string">'0'</span>);</span><br><span class="line">        assertThat(returned,is(expected));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testNullToEmpty</span><span class="params">()</span></span>&#123;</span><br><span class="line">        assertThat(nullToEmpty(<span class="string">"foo"</span>),is(<span class="string">"foo"</span>));</span><br><span class="line">        assertThat(nullToEmpty(<span class="keyword">null</span>),is(<span class="string">""</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">tesEmptyToNull</span><span class="params">()</span></span>&#123;</span><br><span class="line">        assertThat(nullToEmpty(<span class="string">"foo"</span>),is(<span class="string">"foo"</span>));</span><br><span class="line">        assertThat(emptyToNull(<span class="string">""</span>),is(nullValue()));</span><br><span class="line">        assertThat(emptyToNull(<span class="string">"  "</span>),is(<span class="string">"  "</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testIsNullOrEmpty</span><span class="params">()</span></span>&#123;</span><br><span class="line">        assertThat(isNullOrEmpty(<span class="string">""</span>),is(<span class="keyword">true</span>));</span><br><span class="line">        assertThat(isNullOrEmpty(<span class="string">"  "</span>),is(<span class="keyword">false</span>));</span><br><span class="line">        assertThat(isNullOrEmpty(<span class="keyword">null</span>),is(<span class="keyword">true</span>));</span><br><span class="line">        assertThat(isNullOrEmpty(<span class="string">"foo"</span>),is(<span class="keyword">false</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -362,7 +351,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/weblogic/" rel="tag">#weblogic</a>
+            <a href="/tags/Guava/" rel="tag">#Guava</a>
           
         </div>
       
@@ -371,17 +360,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/14/[Google-Guava]-1-引言/" rel="next" title="[Google Guava]1.引言">
-                <i class="fa fa-chevron-left"></i> [Google Guava]1.引言
+              <a href="/2016/04/19/Google-Guava-3-Splitter类/" rel="next" title="[Google Guava]3.Splitter类">
+                <i class="fa fa-chevron-left"></i> [Google Guava]3.Splitter类
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/29/一些在海南拍的相片/" rel="prev" title="一些我们在海南玩拍的相片">
-                一些我们在海南玩拍的相片 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -430,8 +415,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/24/weblogic-12c-部署JAVA项目-出现Qname问题解决方法/"
-           data-title="weblogic 12c 部署JAVA项目 出现Qname问题解决方法" data-url="http://yoursite.com/2016/03/24/weblogic-12c-部署JAVA项目-出现Qname问题解决方法/">
+      <div class="ds-thread" data-thread-key="2016/04/21/Google-Guava-4-String类/"
+           data-title="[Google Guava]4.String类" data-url="http://yoursite.com/2016/04/21/Google-Guava-4-String类/">
       </div>
     
   </div>
@@ -524,7 +509,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u4EE3_u7801_u793A_u4F8B"><span class="nav-number">1.</span> <span class="nav-text">代码示例</span></a></li></ol></div>
             
           </div>
         </section>
