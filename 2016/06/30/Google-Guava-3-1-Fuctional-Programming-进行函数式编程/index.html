@@ -1,0 +1,726 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Guava," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="In this chapter ,we start to notice that using Guava has an impact on how we write our code and makes development easier,We will take a look at how using certain Guava interfaces and classes can help">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Google Guava]3.1Fuctional Programming进行函数式编程">
+<meta property="og:url" content="http://yoursite.com/2016/06/30/Google-Guava-3-1-Fuctional-Programming-进行函数式编程/index.html">
+<meta property="og:site_name" content="Jiangzp's BOLG">
+<meta property="og:description" content="In this chapter ,we start to notice that using Guava has an impact on how we write our code and makes development easier,We will take a look at how using certain Guava interfaces and classes can help">
+<meta property="og:updated_time" content="2016-07-06T03:57:38.102Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Google Guava]3.1Fuctional Programming进行函数式编程">
+<meta name="twitter:description" content="In this chapter ,we start to notice that using Guava has an impact on how we write our code and makes development easier,We will take a look at how using certain Guava interfaces and classes can help">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> [Google Guava]3.1Fuctional Programming进行函数式编程 | Jiangzp's BOLG </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?1933336fa3cb06dcc278ae84c4a28d9c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Jiangzp's BOLG</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                [Google Guava]3.1Fuctional Programming进行函数式编程
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-30T16:16:10+08:00" content="2016-06-30">
+              2016-06-30
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/30/Google-Guava-3-1-Fuctional-Programming-进行函数式编程/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/30/Google-Guava-3-1-Fuctional-Programming-进行函数式编程/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>In this chapter ,we start to notice that using Guava has an impact on how we write our code and makes development easier,<br>We will take a look at how using certain Guava interfaces and classes can help us, by applying well-established patterns to make our<br>code more maintainable as well as robust. <a id="more"></a></p>
+<p>   在这一章，我们开始注意到使用Guava进行编写代码会更加简单。我们将看看如何使用Guava当中的接口和类可以帮助我们，通过应用行之有效的模式，<br>   使我们的代码更容易维护，更加健壮。</p>
+<p>在本章中，我们将涵盖下几点：</p>
+<ul>
+<li>Function 接口： 这节说明了在JAVA编程当中可以引入函数式编程，同时也说明了使用Function接口最好的使用方式，以及什么地方用法不适合。</li>
+<li>Functions 类： Functions类包含一些实用方法来操作实现Function 接口实例.</li>
+<li>Predicate 接口：这个接口是评估一个对象是否满足一定条件，如果满足返回true。</li>
+<li>Supplier 接口： 这个接口可以提供一个对象通过给定的类型。我们也可以看到通过各种各样的方式来创建对象。</li>
+<li>Suppliers 类: 这个类是Suppliers接口的默认实现类。</li>
+</ul>
+<p><strong> 用Function接口 </strong><br>  函数式编程强调使用函数，以实现其目标与不断变化的状态，这与大多数开发者熟悉的改变状态的编程方式形成对比，Function 接口让我们在JAVA代码当中引入函数式编程成为可能。<br>  Function接口中只有两个方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Function</span>&lt;<span class="title">E</span>,<span class="title">T</span>&gt;</span>&#123;</span><br><span class="line">  <span class="function">T <span class="title">apply</span> <span class="params">(F input)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object object)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们不会具体的使用equals方法判断A对象是否相等，只会调用apply方法来比较A对象与B对象是否相等。apply方法接受一个参数并且返回一个对象。一个好的功能实现应该没有<br>副作用，这意味着当一个对象传入apply    方法当中应该是保持不变的。下面一个接受Date对象并且返回Date格式化后字符的例子；<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DateFormatFunction</span> <span class="keyword">implements</span> <span class="title">Function</span>&lt;<span class="title">Date</span>,<span class="title">String</span>&gt; </span>&#123;</span><br><span class="line">　　<span class="annotation">@Override</span></span><br><span class="line">　　<span class="function"><span class="keyword">public</span> String <span class="title">apply</span><span class="params">(Date input)</span> </span>&#123;</span><br><span class="line">　　　　SimpleDateFormat dateFormat = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"dd/mm/yyyy"</span>);</span><br><span class="line">　　　　<span class="keyword">return</span> dateFormat.format(input);</span><br><span class="line">　　&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在这个例子当中，我们可以清楚看到Date对象正在通过SimpleDateformat类转换成我们期望格式的字符串。虽然这个例子可能过于简单，但是它演示了Function接口作用，转换一个对象并且隐藏了实现的细节。通过这个例子我们可以使用实现了Funciton接口的类，我们也可以使用匿名类来实现。看看下面的例子；<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Function&lt;Date,String&gt; function = <span class="keyword">new</span> Function&lt;Date, String&gt;() &#123;</span><br><span class="line">　　<span class="annotation">@Override</span></span><br><span class="line">　　<span class="function"><span class="keyword">public</span> String <span class="title">apply</span><span class="params">( Date input)</span> </span>&#123;</span><br><span class="line">　　　　<span class="keyword">return</span> <span class="keyword">new</span> SimpleDateFormat(<span class="string">"dd/mm/yyyy"</span>).format(input); </span><br><span class="line">　　&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>这两个例子没什么不同。一个是简单的实现了Funtcion接口，另一个是匿名类，实现了Function接口的类的优点是，你可以是用依赖注入来传递一个函数接口到一个协作的类中，使得代码高内聚。</p>
+<p><strong> 使用Function接口的参考 </strong><br>这是一个很好的计划讨论在你的代码中使用匿名类来引入Function接口。在java当前的状态中，我们没有闭包特性。当JAVA8发布后将会改变，现在java的回答就是使用匿名类。当你使用匿名类来充当闭包的时候，语法是相当的繁重。如果使用太频繁，会是你的代码很难跟踪和维护。事实上，对上面的例子分析，这个例子只是为了演示Function是如何使用，我们不能获取到更多的好处。例如，下面代码来实现这个功能会更好。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">formatDate</span><span class="params">(Date input)</span></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> SimpleDateFormat(<span class="string">"dd/mm/yyyy"</span>).format(input)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在比较一下这两个例子，我们会发现后面的更加容易读懂。当我们使用Function取决于你想在什么地方进行转换。如果你有一个类里面包含一个Date 实例变量和一个返回日期转换成期望字符串的方法，你可能更好的执行后面的例子，然而，如果你有一个Date对象的集合并且向获取这些Date的字符串形式的list，使用Function接口可能是一个不错的方法<br>这里的要点是，你不能因为可以就放弃使用Function匿名实例在你的代码里。看你的代码，你是否从函数编程中获得了好处。第四章Guava Coolections 和第六章Guava Cache我们会看些实用的例子。</p>
+<p><strong> 使用Functions类 </strong><br>Functions 类包含一些使用的方法来操作Fucntion接口的实例。在本节当中，我们将会讲其中两个方法。</p>
+<p><strong> 使用Functions.forMap方法 </strong><br>forMap 方法接受一个Map<k,v>的参数并且返回一个Function<k,v>实例，执行apply方法会在map当中进行查找。例如，考虑下面的类代表美国的一个洲。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">State</span> </span>&#123;</span><br><span class="line">　　<span class="keyword">private</span> String name;</span><br><span class="line">　　<span class="keyword">private</span> String code;</span><br><span class="line">　　<span class="keyword">private</span> Set&lt;City&gt; mainCities = <span class="keyword">new</span> HashSet&lt;City&gt;(); </span><br><span class="line">　　<span class="comment">//省去getter和setter方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></k,v></k,v></p>
+<p>现在你有一个名为stateMap的Map<string,state>,他的key就是州名的缩写。现在我们可以创建一个通过州代码来查找的函数，你只需要下面几步：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Function&lt;String,State&gt; lookup = Functions.forMap(stateMap);</span><br><span class="line"><span class="comment">//Would return State object for NewYork</span></span><br><span class="line">lookup.apply(<span class="string">"NY"</span>);</span><br></pre></td></tr></table></figure></string,state></p>
+<p>使用Functions.forMap方法有一个警告。如果传入的key在map当中不存在会抛出IllegalArgumentException异常。然而，有一个重载的forMap方法增加一个默认值参数，如果key没找到会返回默认值。通过使用Function接口来执行state的查找，你可以很容易的改变这个实现。当我们使用Splitter对象来创建一个map或者使用Guava collection 包括其他的一些方法来创建map，总之我们可以在我们代码中借助Guava的力量。</p>
+<p><strong> 使用Functions.compose方法</strong></p>
+<p>假设你现在有一个代表city的类，代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">City</span> </span>&#123;</span><br><span class="line">　　<span class="keyword">private</span> String name;</span><br><span class="line">　　<span class="keyword">private</span> String zipCode;</span><br><span class="line">　　<span class="keyword">private</span> <span class="keyword">int</span> population;</span><br><span class="line">    <span class="comment">//省去getter和setter方法</span></span><br><span class="line">　　<span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">　　　　<span class="keyword">return</span> name;</span><br><span class="line">　　&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>考虑下面的情形：你要创建一个Function实例，传入State对象返回当中mainCities逗号分割的字符串。代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StateToCityString</span> <span class="keyword">implements</span> <span class="title">Function</span>&lt;<span class="title">State</span>,<span class="title">String</span>&gt; </span>&#123;</span><br><span class="line">　　<span class="annotation">@Override</span></span><br><span class="line">　　<span class="function"><span class="keyword">public</span> String <span class="title">apply</span><span class="params">(State input)</span> </span>&#123;</span><br><span class="line">　　　　<span class="keyword">return</span> Joiner.on(<span class="string">","</span>).join(input.getMainCities());</span><br><span class="line">　　&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>更进一步来说。你希望只有一个Function实例通过传入State的名称缩写来返回这State当中mainCities逗号分割的字符串。Guava提高了一个很好的方法来解决这种情况，Functions.compose方法接受两个Function实例作为参数，并且返回这两个Function组合后的Function。所以我们可以使用上面的两个Function来举一个例子：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Function&lt;String,State&gt; lookup = Functions.forMap(stateMap);</span><br><span class="line">Function&lt;State, String&gt; stateFunction = <span class="keyword">new</span> StateToCityString();</span><br><span class="line">Function&lt;String,String&gt; composed = Functions.compose(stateFunction ,lookup);</span><br></pre></td></tr></table></figure></p>
+<p>现在调用composed.apply(“NY”)方法将会返回：”Albany,Buffalo,NewYorkCity”<br> 花一分钟时间来看下方法的调用顺序。composed接受一个“NY”参数并且调用lookup.apply()方法，从lookup.apply()方法中返回的值传入了stateFunction.apply()方法当中并且返回执行结果。可以理解为第二个参数的输入参数就是composed.apply方法的输入参数，第一个参数的输出就是composed.apply 方法的输出。如果不使用composed 方法，在前面的例子将如下所示： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String cities = stateFunction.apply(lookup.apply(<span class="string">"NY"</span>));</span><br></pre></td></tr></table></figure>
+<h2 id="u4F7F_u7528Predicate_u63A5_u53E3"><a href="#u4F7F_u7528Predicate_u63A5_u53E3" class="headerlink" title="使用Predicate接口"></a>使用Predicate接口</h2><p>Predicate接口与Function接口的功能相似。像Function接口一样，Predicate接口也有2个方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Predicate</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">　　<span class="function"><span class="keyword">boolean</span> <span class="title">apply</span><span class="params">(T input)</span></span><br><span class="line">　　<span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object object)</span></span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>Function接口的情况是，我们不会去详细的讲解equals方法。apply方法会返回对输入断定后的结果。在Fucntion接口使用的地方来转换对象，Predicate接口则用于过滤对象。Predicates类的使用与Functions类一样。当一个简单方法能实现的不使用Predicates类。同时，Predicate接口没有任何副作用。在下一章，会讲到Collections，我们会看到Predicate的最佳实践。</p>
+<p><strong> Predicate接口的例子 </strong></p>
+<p>这是Predicate接口的一个简单的例子，我们使用上面例子当中的City类。我们定义一个Predicate来判断这个城市是否有最小人口。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PopulationPredicate</span> <span class="keyword">implements</span> <span class="title">Predicate</span>&lt;<span class="title">City</span>&gt; </span>&#123;</span><br><span class="line">　　<span class="annotation">@Override</span></span><br><span class="line">　　<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">apply</span><span class="params">(City input)</span> </span>&#123;</span><br><span class="line">　　　　<span class="keyword">return</span> input.getPopulation() &lt;= <span class="number">500000</span>;</span><br><span class="line">　　&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在这个例子当中，我们简单的检查了City对象当中的人口属性，当人口属性小于等于500000的时候会返回true。通常，你可以将Predicate的实现定义成匿名类来过滤集合当中的每一个元素。Predicate接口和Function接口是如此的相似，许多情况下使用Fucntion接口的时候同样可以使用Predicate接口。</p>
+<p><strong> 使用Predicates类 </strong></p>
+<p>Predicates类是包含一些实用的方法来操作Predicate接口的实例。Predicates类提供了一些非常有用的方法，从布尔值条件中得到期望的值，也可以使用“and”和“or”方法来连接不同的Predicate实例作为条件，并且如果提供“not”方法一个Predicate实例返回的值是false则“not”方法返回true，反之亦然。同样也有Predicates.compose方法，但是他接受一个Predicate实例和一个Function实例，并且返回Predicate执行后的值，把Function执行后的值当中它的参数。让我们看些例子，我们会更好的理解如何在代码中使用Predicates类。先看个特殊的例子，假设我们有下面两个类的实例。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TemperateClimatePredicate</span> <span class="keyword">implements</span> <span class="title">Predicate</span>&lt;<span class="title">City</span>&gt; </span>&#123;</span><br><span class="line">　　<span class="annotation">@Override</span></span><br><span class="line">　　<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">apply</span><span class="params">(City input)</span> </span>&#123;</span><br><span class="line">　　　　<span class="keyword">return</span> input.getClimate().equals(Climate.TEMPERATE);</span><br><span class="line">　　&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LowRainfallPredicate</span> <span class="keyword">implements</span> <span class="title">Predicate</span>&lt;<span class="title">City</span>&gt; </span>&#123;</span><br><span class="line">　　<span class="annotation">@Override</span></span><br><span class="line">　　<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">apply</span><span class="params">(City input)</span> </span>&#123;</span><br><span class="line">　　　　<span class="keyword">return</span> input.getAverageRainfall() &lt; <span class="number">45.7</span>;</span><br><span class="line">　　&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>值得重申，通常我们会使用匿名类，但为清楚起见，我们将使用具体类。 </p>
+<p><strong> 使用Predicates.and方法 </strong></p>
+<p>Predicates.and方法接受多个Predicate对象并且返回一个Predicate对象，因此调用返回的Predicate对象的apply方法当所有Predicate对象的apply方法都返回true的时候会返回true。如果其中一个Predicate对象返回false，其他的Predicate对象的执行就会停止。例如，假如我们只允许城市人口小于500,000并且年降雨量小于45.7英寸的。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Predicate smallAndDry = Predicates.and(smallPopulationPredicate, lowRainFallPredicate);</span><br></pre></td></tr></table></figure></p>
+<p>下面是Predicates.and方法的签名：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Predicates.and(Iterable&lt;Predicate&lt;T&gt;&gt; predicates);</span><br><span class="line">Predicates.and(Predicate&lt;T&gt; ...predicates);</span><br></pre></td></tr></table></figure></p>
+<p><strong> 使用Predicates.or方法 </strong></p>
+<p>Predicates.or方法接受多个Predicate对象并且返回一个Predicate对象,如果当中有一个Predicate对象的apply方法返回true则总方法就返回true。</p>
+<p>如果有一个Predicate实例返回true，就不会继续执行。例如，假设我们想包含城市人口小于等于500,000或者有温带气候的城市。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Predicate smallTemperate = Predicates.or(smallPopulationPredicate, temperateClimatePredicate);</span><br></pre></td></tr></table></figure></p>
+<p>下面是Predicates.or方法的签名：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Predicates.or(Iterable&lt;Predicate&lt;T&gt;&gt; predicates);</span><br><span class="line">Predicates.or(Predicate&lt;T&gt; ...predicates);</span><br></pre></td></tr></table></figure></p>
+<p><strong> 使用Predicates.not方法 </strong></p>
+<p>Predicates.not接受一个Predicate实例并且执行这个Predicate实例的逻辑否的功能。加入我们想获得人口大于500,000的城市。使用这个方法可以代替重写一个Predicate实例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Predicate largeCityPredicate = Predicates.not(smallPopulationPredicate);</span><br></pre></td></tr></table></figure></p>
+<p><strong> 使用Predicates.compose方法 </strong></p>
+<p>Predicates.compose接受一个Function实例和一个Predicate实例作为参数，并且从Fucntion实例当中返回的对象传入到Predicate对象当中并且进行评估。在下面的例子当中，我们创建一个新的Predicate对象：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SouthwestOrMidwestRegionPredicate</span> <span class="keyword">implements</span> <span class="title">Predicate</span>&lt;<span class="title">State</span>&gt; </span>&#123; </span><br><span class="line">　　<span class="annotation">@Override</span></span><br><span class="line">　　<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">apply</span><span class="params">(State input)</span> </span>&#123;</span><br><span class="line">　　　　<span class="keyword">return</span> input.getRegion().equals(Region.MIDWEST) ||</span><br><span class="line">　　　　　　　　input.getRegion().equals(Region.SOUTHWEST);</span><br><span class="line">　　&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下一步，我们将使用原来的Function实例lookup来创建一个State对象，并且使用上面例子的Predicate实例来评估下这个State是否在MIDWEST或者SOUTHWEST：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Predicate&lt;String&gt; predicate = Predicates.compose(southwestOrMidwestRegionPredicate,lookup);</span><br></pre></td></tr></table></figure></p>
+<p>使用Supplier接口</p>
+<p>Supplier接口只有一个方法如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Supplier</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">　　<span class="function">T <span class="title">get</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>get方法返回泛型T的实例。Supplier接口可以帮助我们实现几个典型的创建模式。当get方法被调用，我们可以返回相同的实例或者每次调用都返回新的实例。Supplier也可以让你灵活选择是否当get方法调用的时候才创建实例。并且Supplier是个接口，单元测试也会更简单，相对于其他方法创建的对象，如静态工厂方法。 总之，供应Supplier接口的强大之处在于它抽象的复杂性和对象如何需要创建的细节，让开发人员自由地在他觉得任何方式创建一个对象时最好的方法。让我们看看如何Supplier接口。</p>
+<p>一个Supplier接口的例子</p>
+<p>下面代码是Supplier接口的例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ComposedPredicateSupplier</span> <span class="keyword">implements</span> <span class="title">Supplier</span>&lt;<span class="title">Predicate</span>&lt;<span class="title">String</span>&gt;&gt; </span>&#123;</span><br><span class="line">　　<span class="annotation">@Override</span></span><br><span class="line">　　<span class="function"><span class="keyword">public</span> Predicate&lt;String&gt; <span class="title">get</span><span class="params">()</span> </span>&#123;</span><br><span class="line">　　　　City city = <span class="keyword">new</span> City(<span class="string">"Austin,TX"</span>,<span class="string">"12345"</span>,<span class="number">250000</span>, Climate.SUB_ TROPICAL, <span class="number">45.3</span>);</span><br><span class="line">　　　　State state = <span class="keyword">new</span> State(<span class="string">"Texas"</span>,<span class="string">"TX"</span>, Sets.newHashSet(city), Region.SOUTHWEST); </span><br><span class="line">　　　　City city1 = <span class="keyword">new</span> City(<span class="string">"New York,NY"</span>,<span class="string">"12345"</span>,<span class="number">2000000</span>,Climate.TEMPERATE, <span class="number">48.7</span>); </span><br><span class="line">　　　　State state1 = <span class="keyword">new</span> State(<span class="string">"New York"</span>,<span class="string">"NY"</span>,Sets.newHashSet(city1), Region.NORTHEAST);</span><br><span class="line">　　　　Map&lt;String,State&gt; stateMap = Maps.newHashMap();</span><br><span class="line">　　　　stateMap.put(state.getCode(),state);</span><br><span class="line">　　　　stateMap.put(state1.getCode(),state1);</span><br><span class="line">　　　　Function&lt;String,State&gt; mf = Functions.forMap(stateMap);</span><br><span class="line">　　　　<span class="keyword">return</span> Predicates.compose(<span class="keyword">new</span> RegionPredicate(), mf);</span><br><span class="line">　　&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这个例子当中，我们看到使用Functions.forMap关键一个Function实例可以通过State的缩写来查找State，和使用Predicate实例来评估在那些地方是否有这个State。然后将Function实例和Predicate实例作为参数传入到Predicates.compose方法当中并且返回期望的Predicate实例。我们使用了两个静态方法，Maps.newHashMap() 和Sets. newHashSet(),这两个都可以在Guava的包当中找到我们下一章会讲到。现在我们每次调用都会返回新的实例。我们也可以把创建Predicate实例的工作放到ComposedPredicateSupplier 的构造方法中来进行，当每次调用get的时候返回相同的实例。接着往下看，Guava提供了更简单的选择。</p>
+<p><strong> 一个Suppliers类 </strong></p>
+<p>正如我们所期望的Guava，有一个Suppliers类的静态方法来操作Supplier实例。在前面的例子，每次调用get方法都会返回一个新的实例。如果我们想改变我们的实现并且每次返回相同的实例，Suppliers给我们一些可选项。</p>
+<p><strong> 使用Suppliers.memoize方法 </strong></p>
+<p>Suppliers.memoize方法返回一个包装了委托实现的Supplier实例。当第一调用get方法，会被调用真实的Supplier实例的get方法。memoize方法返回被包装后的Supplier实例。包装后的Supplier实例会缓存调用返回的结果。后面的调用get方法会返回缓存的实例。我们可以这样使用Suppliers.memoize方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Supplier&lt;Predicate&lt;String&gt;&gt; wrapped = Suppliers.memoize(composedPredicateSupplier);</span><br></pre></td></tr></table></figure>
+<p>只增加一行代码我们就可以返回相同的实例。<br><strong> 使用Suppliers.memoizeWithExpiration方法 </strong></p>
+<p>Suppliers.memoizeWithExpiration方法与memoize方法工作相同，只不过缓存的对象超过了时间就会返回真实Supplier实例get方法返回的值，在给定的时间当中缓存并且返回</p>
+<p>Supplier包装对象。注意这个实例的缓存不是物理缓存，包装后的Supplier对象当中有真实Supplier对象的值。 例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Supplier&lt;Predicate&lt;String&gt;&gt; wrapped = Suppliers.memoizeWithExpiration(composedPredicateSupplier,<span class="number">10L</span>,TimeUnit.MINUTES);</span><br></pre></td></tr></table></figure>
+<p>这里我们包装了Supplier并且设置了超时时间为10分钟。对于ComposedPredicateSupplier来说没什么不同，但是Supplier返回的对象可能不同，可能从数据库当中恢复，例如memoizeWithExpiration方法会非常有用。</p>
+<p>通过依赖注入来使用Supplier接口是强有力的组合。然而，如果你使用Guice（google的依赖注入框架），它包含了Provider<t>接口提供了跟</t></p>
+<p>Supplier<t>接口相同的功能。当然，如果你想利用缓存这个特性你可以使用Supplier接口。</t></p>
+<p><strong> 总结 </strong></p>
+<p>我们看到可以使用Function接口和Predicate接口来在java编程当中添加一些函数方便的功能。Function接口提高给我们转换对象和Predicate接口可以给我们一个强大的过滤机。Functions和Predicates类也帮助我们写代码更加简单。Suppliers通过提供必要的协作对象，而完全隐藏了这些对象创建的细节。 使用依赖注入框架spring或者guice，这些接口将允许我们无缝地通过简单地提供不同的实现改变我们的程序的行为。下一章我们讲Guava的重点，Collections。</p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Guava/" rel="tag">#Guava</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/26/ORA-04052-ORA-00604-ORA-03106-dblink放在存储过程里执行报错/" rel="next" title="ORA-04052: ORA-00604:ORA-03106: dblink放在存储过程里执行报错">
+                <i class="fa fa-chevron-left"></i> ORA-04052: ORA-00604:ORA-03106: dblink放在存储过程里执行报错
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/06/30/Google-Guava-3-1-Fuctional-Programming-进行函数式编程/"
+           data-title="[Google Guava]3.1Fuctional Programming进行函数式编程" data-url="http://yoursite.com/2016/06/30/Google-Guava-3-1-Fuctional-Programming-进行函数式编程/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Jiangzp" />
+          <p class="site-author-name" itemprop="name">Jiangzp</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">19</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u4F7F_u7528Predicate_u63A5_u53E3"><span class="nav-number">1.</span> <span class="nav-text">使用Predicate接口</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jiangzp</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jiangzp"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
