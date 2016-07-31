@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="oracle," />
+  <meta name="keywords" content="Oracle," />
 
 
 
@@ -80,16 +80,16 @@
 
 
 
-<meta name="description" content="实现两个不同服务器的数据库 severA,serverB。 serverA要访问serverB对象 ,serverB把数据写入serverA的对象,以及要注意的事项;">
+<meta name="description" content="最近和同事加班做数据，转换成统一的格式给审计。参考了其他代码，发现有写实现方式，有更好的写法。看上去简单。但易大师说过“真正的大师，永远怀着一颗学徒的心。”所以，记录总结。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="不同服务器的数据库相互访问 ORA-02069">
-<meta property="og:url" content="http://yoursite.com/2016/03/08/不同服务器的数据库相互访问 ORA-02069/index.html">
+<meta property="og:title" content="sql一些更好的写法">
+<meta property="og:url" content="http://yoursite.com/2016/07/31/sql一些更好的写法/index.html">
 <meta property="og:site_name" content="Jiangzp's BOLG">
-<meta property="og:description" content="实现两个不同服务器的数据库 severA,serverB。 serverA要访问serverB对象 ,serverB把数据写入serverA的对象,以及要注意的事项;">
-<meta property="og:updated_time" content="2016-03-08T02:41:36.401Z">
+<meta property="og:description" content="最近和同事加班做数据，转换成统一的格式给审计。参考了其他代码，发现有写实现方式，有更好的写法。看上去简单。但易大师说过“真正的大师，永远怀着一颗学徒的心。”所以，记录总结。">
+<meta property="og:updated_time" content="2016-07-31T10:17:49.941Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="不同服务器的数据库相互访问 ORA-02069">
-<meta name="twitter:description" content="实现两个不同服务器的数据库 severA,serverB。 serverA要访问serverB对象 ,serverB把数据写入serverA的对象,以及要注意的事项;">
+<meta name="twitter:title" content="sql一些更好的写法">
+<meta name="twitter:description" content="最近和同事加班做数据，转换成统一的格式给审计。参考了其他代码，发现有写实现方式，有更好的写法。看上去简单。但易大师说过“真正的大师，永远怀着一颗学徒的心。”所以，记录总结。">
 
 
 
@@ -107,7 +107,7 @@
   };
 </script>
 
-  <title> 不同服务器的数据库相互访问 ORA-02069 | Jiangzp's BOLG </title>
+  <title> sql一些更好的写法 | Jiangzp's BOLG </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -257,7 +257,7 @@
             
             
               
-                不同服务器的数据库相互访问 ORA-02069
+                sql一些更好的写法
               
             
           </h1>
@@ -269,8 +269,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-08T09:50:41+08:00" content="2016-03-08">
-              2016-03-08
+            <time itemprop="dateCreated" datetime="2016-07-31T11:43:52+08:00" content="2016-07-31">
+              2016-07-31
             </time>
           </span>
 
@@ -299,8 +299,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/08/不同服务器的数据库相互访问 ORA-02069/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/08/不同服务器的数据库相互访问 ORA-02069/" itemprop="commentsCount"></span>
+                <a href="/2016/07/31/sql一些更好的写法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/31/sql一些更好的写法/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -322,20 +322,24 @@
       
 
       
-        <p>  实现两个不同服务器的数据库 severA,serverB。 serverA要访问serverB对象 ,serverB把数据写入serverA的对象,以及要注意的事项;<a id="more"></a></p>
-<p>1.在serverA 上用 userC 创建一个tableD 用来储存 serverB 过来的数据;<br>2.userF 通过 DBLINK链接到serverB;</p>
-<pre><code>create public database link DBLINK
- connect to userF
- using &apos;serverA&apos;;
-</code></pre><p>3.在userC 对tableD 做相关赋权给 userF; </p>
-<pre><code>grant select,insert, update on tableD to userF;
-</code></pre><p>4.在userF 创建tableD 的同义词；</p>
-<pre><code>create or replace synonym tableD for userC.tableD;  
-</code></pre><p>5.在serverB的userG上通过DBLINK创建tbaleD 的同义词；  </p>
-<pre><code class="sql"><span class="keyword">create</span> <span class="keyword">or</span> <span class="keyword">replace</span> <span class="keyword">synonym</span> tableD <span class="keyword">for</span> userC.tableD@DBLINK;
-</code></pre>
-<p>实现在userG上写数据后userC可以即时读取，再通过tableD上的触发器来实现所需的操作；</p>
-<p>注意：<br>1.在第4步需要确认是否能访问tableD，相关权限是否正常。如果漏掉这步，userG 将无权限访问tableD,或提示对象不存在；<br>2.如果在userG用户上，用userG用户下的序列直接插数据到 tbaleD，会报错，提示ORA-02069: “此操作的 global_names 参数必须设置为 TRUE”； 应该先拿到序列值，在把数值插入tableD;</p>
+        <p>最近和同事加班做数据，转换成统一的格式给审计。参考了其他代码，发现有写实现方式，有更好的写法。看上去简单。但易大师说过“真正的大师，永远怀着一颗学徒的心。”<br>所以，记录总结。<a id="more"></a></p>
+<ol>
+<li><p>批量执行，数据量多时，可以分批提交。用一个变量计数，100或1000提交一次。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">   i  = 0;</span><br><span class="line"><span class="operator"><span class="keyword">BEGIN</span> </span><br><span class="line">    <span class="keyword">FOR</span> C1 <span class="keyword">IN</span> (<span class="keyword">SELECT</span> ....)  </span><br><span class="line">      <span class="keyword">LOOP</span>  </span><br><span class="line">     <span class="literal">NULL</span>;</span></span><br><span class="line">      <span class="operator"><span class="keyword">END</span> <span class="keyword">LOOP</span>;</span></span><br><span class="line">   i=i+1;</span><br><span class="line"> IF i = 1000 THEN </span><br><span class="line">   <span class="operator"><span class="keyword">COMMIT</span>;</span></span><br><span class="line">   i = 0 ;</span><br><span class="line">   <span class="operator"><span class="keyword">END</span> <span class="keyword">IF</span>;</span></span><br><span class="line"><span class="operator"><span class="keyword">END</span> ;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>用DECODE 查表赋值转码，或CASE..THEN,替换 简单的多分支IF语句。<br>decode(条件,值1,返回值1,值2,返回值2,…值n,返回值n,缺省值) ;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">   IF rt_ydjy3_jzdj.ykc021 = '01' THEN</span><br><span class="line">           rt_yb_yyzyjsd.人员性质 := '1'; <span class="comment">--1在职 2离休干部 3退休 4其他</span></span><br><span class="line">         ELSIF rt_ydjy3_jzdj.ykc021 = '02' THEN</span><br><span class="line">           rt_yb_yyzyjsd.人员性质 := '3';</span><br><span class="line">         ELSIF rt_ydjy3_jzdj.ykc021 = '03' THEN</span><br><span class="line">           rt_yb_yyzyjsd.人员性质 := '2';</span><br><span class="line">         ELSE</span><br><span class="line">           rt_yb_yyzyjsd.人员性质 := '4';</span><br><span class="line">         <span class="operator"><span class="keyword">END</span> <span class="keyword">IF</span>;</span></span><br><span class="line"><span class="comment">--使用DECODE函数</span></span><br><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">SELECT</span> <span class="keyword">DECODE</span>(rt_ydjy3_jzdj.ykc021,<span class="string">'01'</span>,<span class="string">'1'</span>,<span class="string">'02'</span>,<span class="string">'3'</span>,<span class="string">'03'</span>,<span class="string">'2'</span>,<span class="string">'4'</span>) </span><br><span class="line"><span class="keyword">INTO</span> rt_yb_yyzyjsd.人员性质  <span class="keyword">FROM</span> DUAL;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--使用CASE..THEN </span></span><br><span class="line"></span><br><span class="line">   CASE </span><br><span class="line">      WHEN rt_ydjy3_jzdj.ykc021='01' THEN</span><br><span class="line">       rt_yb_yyzyjsd.人员性质:='1';</span><br><span class="line">      WHEN rt_ydjy3_jzdj.ykc021='02' THEN </span><br><span class="line">      rt_yb_yyzyjsd.人员性质 :='3';</span><br><span class="line">      WHEN rt_ydjy3_jzdj.ykc021='03' THEN </span><br><span class="line">        rt_yb_yyzyjsd.人员性质 :='2';</span><br><span class="line">      ESLE</span><br><span class="line">      rt_yb_yyzyjsd.人员性质 := '4';  <span class="comment">--没有时写 NULL；</span></span><br><span class="line">   <span class="operator"><span class="keyword">END</span>;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li><p>灵活使用 GOTO，控制程序流程。   </p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">-- 简单GOTO 语句，判断数字是否为质数：</span><br><span class="line"> DECLARE</span><br><span class="line">  done BOOLEAN;</span><br><span class="line">BEGIN</span><br><span class="line">  FOR i IN 1 .. 50 LOOP</span><br><span class="line">    IF done THEN</span><br><span class="line">      GOTO end_loop;</span><br><span class="line">    END IF;</span><br><span class="line">    &lt;&lt;end_loop&gt;&gt; -- not allowed unless an executable statement follows</span><br><span class="line">    NULL; -- add NULL statement to avoid error 使用null避免报错.</span><br><span class="line">  END LOOP; -- raises an error without the previous NULL</span><br><span class="line">END;</span><br><span class="line"></span><br><span class="line">--出现异常，跳到下一条，不影响程序执行。</span><br><span class="line"> BEGIN </span><br><span class="line">    FOR C IN (SELECT ...) LOOP </span><br><span class="line"> </span><br><span class="line">    BEGIN </span><br><span class="line">     SELECT * FROM TMP WHERE ID =C.ID ;</span><br><span class="line"></span><br><span class="line">     EXCEPTION </span><br><span class="line">       WHEN NO_DATA_FOUND THEN </span><br><span class="line"></span><br><span class="line">       GOTO &lt;&lt;next_loop&gt;&gt;</span><br><span class="line">  END;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &lt;&lt;next_loop&gt;&gt; </span><br><span class="line">    NULL;</span><br><span class="line">    END LOOP;</span><br><span class="line">END ;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>数据量多时，尽量少使用多表关联查询。</p>
+</li>
+<li><p>捕捉异常 DBMS_OUTPUT.put_line(SQLERRM);</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">BENGIN</span><br><span class="line">   <span class="operator"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> TMP (<span class="keyword">ID</span>,<span class="keyword">NAME</span> ,AGE)<span class="keyword">VALUES</span> (<span class="string">''</span>,<span class="string">''</span>,<span class="string">''</span>);</span></span><br><span class="line">EXCEPITON </span><br><span class="line">  WHEN OTHERS THEN</span><br><span class="line">   DBMS_OUTPUT.put_line(SQLERRM);</span><br><span class="line">   <span class="operator"><span class="keyword">END</span>;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
 
       
     </div>
@@ -356,7 +360,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/oracle/" rel="tag">#oracle</a>
+            <a href="/tags/Oracle/" rel="tag">#Oracle</a>
           
         </div>
       
@@ -365,17 +369,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/02/28/牧羊人奇幻之旅/" rel="next" title="牧羊少年奇幻之旅">
-                <i class="fa fa-chevron-left"></i> 牧羊少年奇幻之旅
+              <a href="/2016/07/08/写在廿七岁的伊始/" rel="next" title="写在廿七岁的伊始">
+                <i class="fa fa-chevron-left"></i> 写在廿七岁的伊始
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/14/[Google-Guava]-1-引言/" rel="prev" title="[Google Guava]1.引言">
-                [Google Guava]1.引言 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -424,8 +424,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/08/不同服务器的数据库相互访问 ORA-02069/"
-           data-title="不同服务器的数据库相互访问 ORA-02069" data-url="http://yoursite.com/2016/03/08/不同服务器的数据库相互访问 ORA-02069/">
+      <div class="ds-thread" data-thread-key="2016/07/31/sql一些更好的写法/"
+           data-title="sql一些更好的写法" data-url="http://yoursite.com/2016/07/31/sql一些更好的写法/">
       </div>
     
   </div>
