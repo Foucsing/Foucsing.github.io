@@ -86,7 +86,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/07/31/sql一些更好的写法/index.html">
 <meta property="og:site_name" content="Jiangzp's BOLG">
 <meta property="og:description" content="最近和同事加班做数据，转换成统一的格式给审计。参考了其他代码，发现有写实现方式，有更好的写法。看上去简单。但易大师说过“真正的大师，永远怀着一颗学徒的心。”所以，记录总结。">
-<meta property="og:updated_time" content="2016-07-31T10:17:49.941Z">
+<meta property="og:updated_time" content="2016-08-02T07:49:03.956Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sql一些更好的写法">
 <meta name="twitter:description" content="最近和同事加班做数据，转换成统一的格式给审计。参考了其他代码，发现有写实现方式，有更好的写法。看上去简单。但易大师说过“真正的大师，永远怀着一颗学徒的心。”所以，记录总结。">
@@ -337,9 +337,17 @@
 </li>
 <li><p>数据量多时，尽量少使用多表关联查询。</p>
 </li>
-<li><p>捕捉异常 DBMS_OUTPUT.put_line(SQLERRM);</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">BENGIN</span><br><span class="line">   <span class="operator"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> TMP (<span class="keyword">ID</span>,<span class="keyword">NAME</span> ,AGE)<span class="keyword">VALUES</span> (<span class="string">''</span>,<span class="string">''</span>,<span class="string">''</span>);</span></span><br><span class="line">EXCEPITON </span><br><span class="line">  WHEN OTHERS THEN</span><br><span class="line">   DBMS_OUTPUT.put_line(SQLERRM);</span><br><span class="line">   <span class="operator"><span class="keyword">END</span>;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>SQLCODE 与 SQLERRM<br>在一个内在的异常中，SQLCODE返回Oracle错误的序号，而SQLERRM返回的是相应的错误消息，错误消息首先显示的是错误代码。SQLCODE返回的是负数，<br>除非Oracle的错误为“ORA-01403：NO DATA FOUND”（译：ORA-01403：未找到数据），当Oracle错误为“ORA-01403：NO DATA FOUND”时，其对应的SQLCODE为+100。对于用户自定义的异常，SQLCODE返回的是+1，而SQLERRM返回的是User-Defined Exception。一个Oracle的错误消息最多只能包含512个字节的错误代码。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">DECLARE</span> </span><br><span class="line">  v_ename emp.ename%<span class="keyword">TYPE</span>;</span></span><br><span class="line">  e_norecord EXCEPTION;</span><br><span class="line">  <span class="operator"><span class="keyword">PRAGMA</span> EXCEPTION_INIT (e_norecord, -<span class="number">20001</span>);</span></span><br><span class="line"></span><br><span class="line">  err_num NUMBER;</span><br><span class="line">  err_msg VARCHAR2(100);</span><br><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">BEGIN</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">SELECT</span> ename <span class="keyword">INTO</span> v_ename <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> empno=<span class="number">3000</span>;</span> </span><br><span class="line"></span><br><span class="line">EXCEPTION</span><br><span class="line">  WHEN OTHERS THEN</span><br><span class="line">      err_num := SQLCODE;</span><br><span class="line">      err_msg := SUBSTR(SQLERRM, 1, 100);</span><br><span class="line">      DBMS_OUTPUT.PUT_LINE(err_num||'<span class="comment">----'||err_msg);</span></span><br><span class="line"><span class="operator"><span class="keyword">END</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--100----ORA-01403: no data found</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>捕捉异常输出 DBMS_OUTPUT.put_line(SQLERRM);</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">BENGIN</span><br><span class="line">   <span class="operator"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> TMP (<span class="keyword">ID</span>,<span class="keyword">NAME</span> ,AGE)<span class="keyword">VALUES</span> (<span class="string">''</span>,<span class="string">''</span>,<span class="string">''</span>);</span></span><br><span class="line">EXCEPITON </span><br><span class="line">  WHEN OTHERS THEN</span><br><span class="line">   DBMS_OUTPUT.put_line(SQLERRM);</span><br><span class="line">   <span class="operator"><span class="keyword">END</span>;</span></span><br><span class="line"></span><br><span class="line">BENGIN   </span><br><span class="line">   e_err exception; <span class="comment">--查询出错</span></span><br><span class="line"></span><br><span class="line">    <span class="operator"><span class="keyword">BEGIN</span></span><br><span class="line">      <span class="keyword">select</span> * <span class="keyword">into</span> rowtype  <span class="keyword">from</span> tmp</span><br><span class="line">        </span><br><span class="line">   <span class="keyword">EXCEPTION</span></span><br><span class="line">      <span class="keyword">when</span> others <span class="keyword">then</span></span><br><span class="line">         <span class="keyword">raise</span> e_err;</span>  <span class="comment">--抛出异常</span></span><br><span class="line">   <span class="operator"><span class="keyword">END</span>;</span></span><br><span class="line">EXCEPTION </span><br><span class="line">   WHEN e_err THEN  <span class="comment">--处理异常</span></span><br><span class="line">      raise_application_error(-20700,"查询出错！");</span><br><span class="line">   <span class="operator"><span class="keyword">insert</span> <span class="keyword">into</span>...   <span class="comment">--写入日志表</span></span><br><span class="line">   <span class="keyword">END</span> ;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>自定义异常 raise_application_error(error_number,message[,[truefalse]]);</p>
+</li>
 </ol>
+<p>error_number 用于定义不正确号，该不正确号必须在-20000到-20999之间的负整数；<br>message 用于指定不正确消息，并且该消息的长度无法超过2048字节；<br>第三个参数假如为true，则该不正确会被放在先前不正确堆栈中，假如为false（默认值）则会替代先前所有不正确。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">exception</span><br><span class="line">  WHEN NO_DATA_FOUND THEN </span><br><span class="line">      raise_application_error(-20700,"没有找到相关数据");</span><br><span class="line">   when others then</span><br><span class="line">      ls_err := 'sqlcode:' || to_char(sqlcode) || 'sqlerrm:' || sqlerrm;</span><br><span class="line">      raise_application_error(-20700,ls_err);</span><br><span class="line"><span class="operator"><span class="keyword">end</span>;</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -376,6 +384,10 @@
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/05/一碗鸡汤/" rel="prev" title="一碗鸡汤">
+                一碗鸡汤 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -470,7 +482,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">22</span>
+              <span class="site-state-item-count">23</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
